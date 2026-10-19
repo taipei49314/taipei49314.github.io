@@ -1,0 +1,5 @@
+_site/
+shots/
+node_modules/
+build-report.json
+server.log
