@@ -181,6 +181,23 @@ async function run(browser, lang, motion) {
     await wait(500);
     await shot("01-top");
     await overflow("static page");
+    // Readable viewport-sized views of the static article (the full-page
+    // image is too tall to inspect at phone widths).
+    for (const [label, sel] of [
+      ["03-hero-bridge", ".step-bridge"],
+      ["04-checkwash-demo", "#demo-cw"],
+      ["05-pinwash-demo", "#demo-pw"],
+      ["06-ledgerwash-demo", "#demo-lw"],
+      ["07-family", "#family"],
+      ["08-punctum-stage", "#punctum-stage"],
+      ["09-gallery", ".gallery"],
+      ["10-contact", "#contact"],
+    ]) {
+      if (!(await scrollIntoView(sel, "start"))) fail(`missing ${sel}`);
+      await wait(250);
+      await shot(label);
+    }
+    await scrollTo(0);
   }
 
   // Every <img> on the page must have loaded by now.

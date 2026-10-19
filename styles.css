@@ -563,7 +563,10 @@ sup a {
   line-height: 1.18;
 }
 
-.bridge-title {
+.bridge-title,
+.bridge-sub,
+.hero-sub,
+.caption-lead {
   text-wrap: balance;
 }
 
@@ -1175,7 +1178,7 @@ html:not(.is-scrub) .step[data-step="3"] {
 /* pinwash: timeline */
 .timeline {
   position: relative;
-  aspect-ratio: 400 / 150;
+  aspect-ratio: 400 / 112;
   margin-top: 28px;
   max-width: 900px;
 }
@@ -1265,7 +1268,7 @@ html:not(.is-scrub) .step[data-step="3"] {
 .tl-label {
   position: absolute;
   left: var(--x);
-  top: calc(66.67% + 14px);
+  top: calc(62.5% + 14px);
   transform: translateX(-50%);
   font-family: var(--mono);
   font-size: clamp(11px, 1.6vw, 14px);

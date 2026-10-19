@@ -117,14 +117,14 @@
     "pw.btnPlain": "Last step only",
     "pw.btnPinned": "From BASE",
     "pw.ev1": "adds an exemption (.pinwash/allow.toml)",
-    "pw.ev2": "uncommitted: the Stop hook that guards the work now runs exit 0",
+    "pw.ev2": "uncommitted: the Stop hook that guards the work now runs exit&nbsp;0",
     "pw.missed": "last step only: not flagged",
     "pw.capEvents":
-      "The agent commits an exemption, then, without committing, rewrites the Stop hook that guards its work to exit 0.",
+      "The agent commits an exemption, then, without committing, rewrites the Stop hook that guards its work to exit&nbsp;0.",
     "pw.capPlain":
       "Compare only HEAD with the worktree and exemptions are read from HEAD: the agent's own new exemption is trusted, and the hook change gets through. Check only the last commit and you never see the uncommitted edit.",
     "pw.capPinned":
-      'pinwash runs three comparisons: BASE..HEAD, BASE..WORKTREE and HEAD..WORKTREE. The two that start at BASE read exemptions only from the pinned BASE, so the hook rewritten to exit 0 is flagged in BASE..WORKTREE, and the new exemption is listed too, waiting for a human to review it.<sup><a href="#fn-2" id="ref-2b">2</a></sup>',
+      'pinwash runs three comparisons: BASE..HEAD, BASE..WORKTREE and HEAD..WORKTREE. The two that start at BASE read exemptions only from the pinned BASE, so the hook rewritten to exit&nbsp;0 is flagged in BASE..WORKTREE, and the new exemption is listed too, waiting for a human to review it.<sup><a href="#fn-2" id="ref-2b">2</a></sup>',
     "pw.body":
       'It watches the things that decide whether “done” can be trusted: CI workflows, agent hooks, exemption rules, required status checks. pinwash gives a verdict, but it doesn\'t block anything for you.<sup><a href="#fn-4" id="ref-4a">4</a></sup>',
     "pw.status": "Alpha (pre-release), accepted on Linux only so far",
@@ -223,11 +223,11 @@
     "fn.2":
       "The diffs, task IDs and dates on this page are illustrative. Rule names come from each project's SPEC; see each project's README for the real output.",
     "fn.3":
-      "checkwash flags known patterns of weakened tests. No findings doesn't mean the code is correct, and exit 2 is an analysis error, not a pass.",
+      "checkwash flags known patterns of weakened tests. No findings doesn't mean the code is correct, and exit&nbsp;2 is an analysis error, not a pass.",
     "fn.4":
       "pinwash is Alpha (v0.1.1 pre-release). It gives a verdict but doesn't block anything for you, and no findings doesn't mean your checks actually ran. Package acceptance so far covers Linux only; Windows and macOS are not yet validated.",
     "fn.5":
-      "ledgerwash checks only evidence that can be verified mechanically. It compares the dates the ledger claims, not trusted timestamps, and exit 0 doesn't mean a ledger is honest.",
+      "ledgerwash checks only evidence that can be verified mechanically. It compares the dates the ledger claims, not trusted timestamps, and exit&nbsp;0 doesn't mean a ledger is honest.",
     "fn.back": "Back to text",
     "fn.backPn": "Back to the PUNCTUM sketch",
     "fn.backCw": "a, back to the checkwash example",
@@ -971,8 +971,12 @@
           if (introT < 1) animating = true;
         }
         const ei = easeOut(introT);
-        const baseYaw = lerp(0.85, 0.42, ei);
-        const basePitch = lerp(-0.22, -0.1, ei);
+        // On tall (portrait) screens, look from above so depth spreads the
+        // pieces vertically and the cloud fills the screen; on wide screens,
+        // look from the side.
+        const portrait = window.innerHeight > window.innerWidth * 1.15;
+        const baseYaw = portrait ? lerp(0.3, 0.14, ei) : lerp(0.85, 0.42, ei);
+        const basePitch = portrait ? lerp(-0.75, -0.4, ei) : lerp(-0.22, -0.1, ei);
         const t = pSmooth >= LOCK_AT ? 1 : easeInOut(clamp01((pSmooth - 0.04) / (LOCK_AT - 0.04)));
         engine.setPose(baseYaw * (1 - t), basePitch * (1 - t));
         try {
@@ -1074,7 +1078,7 @@
       seed: 1890,
       pivotZ: 3.5,
       fitNear: 1,
-      fitFar: 6,
+      fitFar: 7,
       brackets: true,
       eyeMarker: true,
       densityScale: 0.8,

@@ -225,7 +225,7 @@
             </div>
 
             <div class="timeline" aria-hidden="true">
-              <svg class="timeline-svg" viewBox="0 0 400 150" focusable="false">
+              <svg class="timeline-svg" viewBox="0 30 400 112" focusable="false">
                 <line class="tl-rail" x1="30" y1="100" x2="345" y2="100" />
                 <path class="tl-arc tl-arc-bw" pathLength="1" d="M 30 100 Q 187.5 -2 345 100" />
                 <path class="tl-arc tl-arc-bh" pathLength="1" d="M 30 100 Q 135 30 240 100" />
@@ -253,7 +253,7 @@
               </li>
               <li>
                 <span class="tl-ev-where">WORKTREE</span>
-                <span class="tl-ev-what" data-i18n="pw.ev2">沒提交：把負責把關的 Stop hook 改成 exit 0</span>
+                <span class="tl-ev-what" data-i18n="pw.ev2">沒提交：把負責把關的 Stop hook 改成 exit&nbsp;0</span>
                 <span class="tl-ev-status">
                   <span class="flag flag-muted tl-st-plain" data-i18n="pw.missed">只比最後一步：沒被標出</span>
                   <span class="flag flag-block tl-st-pinned"><span class="flag-mark" aria-hidden="true">▲</span>GATE_STUBBED</span>
@@ -262,9 +262,9 @@
             </ul>
 
             <figcaption class="demo-caption">
-              <span class="cap cap-events" data-i18n="pw.capEvents">agent 先提交一筆豁免，再在沒提交的工作區裡，把負責把關的 Stop hook 改成 exit 0。</span>
+              <span class="cap cap-events" data-i18n="pw.capEvents">agent 先提交一筆豁免，再在沒提交的工作區裡，把負責把關的 Stop hook 改成 exit&nbsp;0。</span>
               <span class="cap cap-plain" data-i18n="pw.capPlain">只比 HEAD 和工作區：豁免規則從 HEAD 讀，agent 剛加的那筆會被採信，hook 的改動就這樣過關。只看最後一個 commit，又看不到沒提交的改動。</span>
-              <span class="cap cap-pinned" data-i18n-html="pw.capPinned">pinwash 做三組比對：BASE..HEAD、BASE..WORKTREE、HEAD..WORKTREE。從 BASE 起算的兩組，只從釘住的 BASE 讀豁免規則，所以被改成 exit 0 的 hook 會在 BASE..WORKTREE 被標出來；新加的豁免也會列出來，要等人看過才算數。<sup><a href="#fn-2" id="ref-2b">2</a></sup></span>
+              <span class="cap cap-pinned" data-i18n-html="pw.capPinned">pinwash 做三組比對：BASE..HEAD、BASE..WORKTREE、HEAD..WORKTREE。從 BASE 起算的兩組，只從釘住的 BASE 讀豁免規則，所以被改成 exit&nbsp;0 的 hook 會在 BASE..WORKTREE 被標出來；新加的豁免也會列出來，要等人看過才算數。<sup><a href="#fn-2" id="ref-2b">2</a></sup></span>
             </figcaption>
           </figure>
 
@@ -528,11 +528,11 @@
           <a href="#ref-2a" class="fn-back" aria-label="a，回到 checkwash 的範例" data-i18n-attr="aria-label:fn.backCw">↩ a</a>
           <a href="#ref-2b" class="fn-back" aria-label="b，回到 pinwash 的範例" data-i18n-attr="aria-label:fn.backPw">b</a>
           <a href="#ref-2c" class="fn-back" aria-label="c，回到 ledgerwash 的範例" data-i18n-attr="aria-label:fn.backLw">c</a></li>
-        <li id="fn-3"><span data-i18n="fn.3">checkwash 標出的是已知的測試弱化模式。沒有發現，不代表程式正確；exit 2 是分析錯誤，不是通過。</span>
+        <li id="fn-3"><span data-i18n="fn.3">checkwash 標出的是已知的測試弱化模式。沒有發現，不代表程式正確；exit&nbsp;2 是分析錯誤，不是通過。</span>
           <a href="#ref-3a" class="fn-back" aria-label="回到內文" data-i18n-attr="aria-label:fn.back">↩</a></li>
         <li id="fn-4"><span data-i18n="fn.4">pinwash 是 Alpha（v0.1.1 pre-release）：會給出判定，但不替你擋下任何改動；沒有發現，不代表驗證真的有跑。套件驗收目前只涵蓋 Linux，Windows 與 macOS 還沒驗證。</span>
           <a href="#ref-4a" class="fn-back" aria-label="回到內文" data-i18n-attr="aria-label:fn.back">↩</a></li>
-        <li id="fn-5"><span data-i18n="fn.5">ledgerwash 只檢查能機械核對的證據，比對的是帳本自己宣稱的日期，不是可信的時間戳；exit 0 不代表帳本誠實。</span>
+        <li id="fn-5"><span data-i18n="fn.5">ledgerwash 只檢查能機械核對的證據，比對的是帳本自己宣稱的日期，不是可信的時間戳；exit&nbsp;0 不代表帳本誠實。</span>
           <a href="#ref-5a" class="fn-back" aria-label="回到內文" data-i18n-attr="aria-label:fn.back">↩</a></li>
       </ol>
       <div class="footer-row">
