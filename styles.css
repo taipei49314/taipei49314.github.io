@@ -570,6 +570,14 @@ sup a {
   text-wrap: balance;
 }
 
+/* Short zh lines that name things: break only at spaces and punctuation, so
+   balance can't split a word like 任務 across lines. */
+:lang(zh-Hant) .bridge-sub,
+:lang(zh-Hant) .hero-sub {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 .bridge-sub {
   max-width: 620px;
   margin-inline: auto;
