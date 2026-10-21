@@ -103,5 +103,11 @@ eagerly; the rest use `loading="lazy"`.
 
 ## Status
 
-The screenshots are the first time this version has been rendered; read them
-before treating the page as checked.
+Engineering delivery at `0877330b62d8515035a3db524527978aba6dca63` is complete:
+[Site run 39253704116](https://github.com/taipei49314/taipei49314.github.io/actions/runs/39253704116)
+passed image conversion, screenshot and smoke checks at 375/768/1280/1920 px in
+both languages and motion modes, and Pages deployment. EC repository accounting
+and the complete census refresh were completed under T-575, which is DONE.
+This 2026-10-22 status reconciliation removes that completed delivery from the
+pending list. Human visual acceptance is not recorded; the screenshot artifacts
+still require human review before claiming that acceptance.
