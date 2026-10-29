@@ -137,4 +137,5 @@ as is. Only the hero image loads eagerly; the rest use `loading="lazy"`.
 - The earlier design was delivered at `0877330` (Site run
   [39253704116](https://github.com/taipei49314/taipei49314.github.io/actions/runs/39253704116)).
   Human visual acceptance has never been recorded for either design.
-- Deploy needs GitHub Pages enabled for this repository.
+- Deploy needs GitHub Pages enabled with **Source: GitHub Actions**. "Deploy from a
+  branch" would serve the unbuilt repository root instead of `_site/`.
