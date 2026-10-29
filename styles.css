@@ -1,8 +1,10 @@
 /* ==========================================================================
    Nelson — taipei49314.github.io
-   Two surfaces, like gallery lighting: NIGHT (hero, PUNCTUM) and GESSO
-   (tools, contact, footer). Two meaning colours: gold = something lines up,
-   signal red = something got weaker. System fonts only, no dependencies.
+   Two surfaces, like gallery lighting: NIGHT (hero, works, Starry Night) and
+   GESSO (checkwash, Editorial Doll, contact, footer), plus a SAND variant of
+   night for The Returning Passage. Two meaning colours: gold = something
+   lines up, signal red = something got weaker. System fonts only, no
+   dependencies.
 
    Never put overflow (other than `clip` on <html>) on an ancestor of
    .scene-sticky: it silently breaks position: sticky.
@@ -27,6 +29,13 @@
   --signal: #9f2814;
   --signal-night: #ff6a55;
   --pass-green: #1f5e3a;
+
+  /* The Returning Passage's own palette (its docs/DESIGN.md). */
+  --sand-bg: #14110d;
+  --sand-ink: #ede2cf;
+  --sand-ink-2: #aa9b85;
+  --sand-gold: #d3b27c;
+  --sand-line: rgba(237, 226, 207, 0.14);
 
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
     "PingFang TC", "Noto Sans TC", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif;
@@ -142,6 +151,18 @@ sup a {
   top: 12px;
 }
 
+.mono {
+  font-family: var(--mono);
+}
+
+/* The shared SVG defs take no space. */
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -157,7 +178,6 @@ sup a {
 /* Controls that only work with app.js. "no-js" is set before first paint
    (no JavaScript) or by the script tag's onerror / start()'s catch. */
 .no-js .seg,
-.no-js .stage-controls,
 .no-js .cmd-copy,
 .no-js #copy-email,
 .no-js .lang-toggle,
@@ -176,6 +196,12 @@ sup a {
 .surface-night {
   background: var(--night);
   color: var(--night-ink);
+  color-scheme: dark;
+}
+
+.surface-sand {
+  background: var(--sand-bg);
+  color: var(--sand-ink);
   color-scheme: dark;
 }
 
@@ -323,12 +349,17 @@ sup a {
   color: var(--ink);
 }
 
+/* A work's title rather than a repository name. */
+.kicker-name.kicker-title {
+  font-family: var(--sans);
+  font-size: 17px;
+}
+
 .kicker-ver {
   align-self: center;
   padding: 1px 10px;
   border: 1px solid var(--gesso-line);
   border-radius: 999px;
-  font-family: var(--mono);
   font-size: 13px;
   color: var(--ink-2);
 }
@@ -611,11 +642,13 @@ sup a {
   text-underline-offset: 4px;
 }
 
-.bridge-map code {
-  font-family: var(--mono);
-  font-size: 0.92em;
+.bridge-map b {
   font-weight: 700;
   color: var(--gold);
+}
+
+.bridge-map b.mono {
+  font-size: 0.92em;
 }
 
 /* Static hero: no JS, no sticky support, or reduced motion. The page reads
@@ -820,10 +853,6 @@ html:not(.is-scrub) .step[data-step="3"] {
    TOOLS (gesso)
    ========================================================================== */
 
-.tool + .tool {
-  border-top: 1px solid var(--gesso-line);
-}
-
 .tool-body {
   max-width: 760px;
   margin-top: 8px;
@@ -871,23 +900,6 @@ html:not(.is-scrub) .step[data-step="3"] {
   color: var(--gesso);
 }
 
-.surface-night .seg {
-  background: rgba(242, 239, 232, 0.08);
-}
-
-.surface-night .seg-btn {
-  color: var(--night-ink-2);
-}
-
-.surface-night .seg-btn:hover {
-  color: var(--night-ink);
-}
-
-.surface-night .seg-btn[aria-pressed="true"] {
-  background: var(--night-ink);
-  color: var(--night);
-}
-
 /* Demo frame */
 .demo {
   margin-block: clamp(36px, 6vh, 64px) 28px;
@@ -933,20 +945,6 @@ html:not(.is-scrub) .step[data-step="3"] {
   background: rgba(192, 49, 27, 0.1);
   color: var(--signal);
   border: 1px solid rgba(192, 49, 27, 0.4);
-}
-
-.flag-hold {
-  background: rgba(233, 185, 73, 0.18);
-  color: var(--gold-ink);
-  border: 1px solid rgba(125, 84, 0, 0.35);
-}
-
-.flag-muted {
-  background: transparent;
-  color: var(--ink-2);
-  border: 1px dashed var(--ink-3);
-  font-family: var(--sans);
-  font-weight: 600;
 }
 
 /* checkwash: code panel */
@@ -1183,289 +1181,7 @@ html:not(.is-scrub) .step[data-step="3"] {
   content: " ✓";
 }
 
-/* pinwash: timeline */
-.timeline {
-  position: relative;
-  aspect-ratio: 400 / 112;
-  margin-top: 28px;
-  max-width: 900px;
-}
-
-.timeline-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.tl-rail {
-  stroke: var(--ink-3);
-  stroke-width: 2;
-}
-
-.tl-arc {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset 0.9s var(--ease-io), stroke 0.3s var(--ease);
-}
-
-.tl-node {
-  fill: var(--gesso);
-  stroke: var(--ink);
-  stroke-width: 2;
-  transition: fill 0.3s var(--ease), stroke 0.3s var(--ease);
-}
-
-.tl-node-base {
-  fill: var(--gold);
-  stroke: var(--gold-ink);
-}
-
-.tl-node-change {
-  stroke: var(--signal);
-  stroke-dasharray: 3 3;
-}
-
-.tl-pin {
-  stroke: var(--gold-ink);
-  stroke-width: 3;
-  stroke-linecap: round;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.4s var(--ease), transform 0.5s var(--ease);
-}
-
-.demo-pw[data-state="plain"] .tl-arc-hw {
-  stroke: var(--ink-3);
-  stroke-dashoffset: 0;
-}
-
-.demo-pw[data-state="pinned"] .tl-arc {
-  stroke-dashoffset: 0;
-}
-
-.demo-pw[data-state="pinned"] .tl-arc-bh {
-  transition-delay: 0.15s;
-}
-
-.demo-pw[data-state="pinned"] .tl-arc-bw {
-  transition-delay: 0.45s;
-}
-
-.demo-pw[data-state="pinned"] .tl-arc-hw {
-  transition-delay: 0.75s;
-}
-
-.demo-pw[data-state="pinned"] .tl-pin {
-  opacity: 1;
-  transform: none;
-}
-
-.demo-pw[data-state="pinned"] .tl-node-change {
-  fill: var(--signal);
-  stroke: var(--signal);
-  stroke-dasharray: none;
-  transition-delay: 1.1s;
-}
-
-.tl-label {
-  position: absolute;
-  left: var(--x);
-  top: calc(62.5% + 14px);
-  transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: clamp(11px, 1.6vw, 14px);
-  font-weight: 700;
-  white-space: nowrap;
-  color: var(--ink);
-}
-
-.tl-label-minor {
-  font-weight: 500;
-  color: var(--ink-2);
-}
-
-.tl-events {
-  list-style: none;
-  padding: 0;
-  margin-top: 22px;
-  display: grid;
-  gap: 10px;
-  max-width: 900px;
-}
-
-.tl-events li {
-  display: grid;
-  grid-template-columns: 7.5em minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 6px 14px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background: var(--gesso-panel);
-}
-
-.tl-ev-where {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink-2);
-}
-
-.tl-ev-what {
-  font-size: 16px;
-}
-
-.tl-ev-status {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 6px 8px;
-  min-height: 28px;
-  align-items: center;
-}
-
-/* Both flags always take their space (visibility, not display), so the rows
-   don't reflow while the demo plays. */
-.tl-st-plain,
-.tl-st-pinned {
-  visibility: hidden;
-}
-
-.demo-pw[data-state="plain"] .tl-st-plain,
-.demo-pw[data-state="pinned"] .tl-st-plain,
-.demo-pw[data-state="pinned"] .tl-st-pinned {
-  visibility: visible;
-}
-
-/* In the final state the miss stays next to the catch, struck through. */
-.demo-pw[data-state="pinned"] .tl-st-plain {
-  text-decoration: line-through;
-  text-decoration-color: var(--ink-3);
-}
-
-@media (min-width: 600px) and (max-width: 999px) {
-  .tl-events li {
-    grid-template-columns: 7.5em minmax(0, 1fr);
-  }
-
-  .tl-ev-status {
-    grid-column: 2;
-  }
-}
-
-.demo-pw[data-state="events"] .cap-events,
-.demo-pw[data-state="plain"] .cap-plain,
-.demo-pw[data-state="pinned"] .cap-pinned {
-  visibility: visible;
-}
-
-/* ledgerwash: receipt */
-.demo-lw {
-  position: relative;
-}
-
-.receipt {
-  max-width: 780px;
-  padding: clamp(18px, 3.2vw, 34px);
-  border-radius: 20px;
-  background: var(--gesso-panel);
-  border: 1px solid var(--gesso-line);
-  font-family: var(--mono);
-}
-
-.receipt-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 4px 18px;
-  padding-bottom: 14px;
-  font-size: 13px;
-  color: var(--ink-2);
-  border-bottom: 1px dashed var(--ink-3);
-}
-
-.receipt-row {
-  display: grid;
-  gap: 8px;
-  padding: 18px 0;
-  border-bottom: 1px dashed var(--ink-3);
-}
-
-.receipt-row:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.receipt-id {
-  font-size: clamp(18px, 2.4vw, 24px);
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.receipt-state {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 1px 8px;
-  border-radius: 6px;
-  vertical-align: 3px;
-  font-size: 13px;
-  background: var(--ink);
-  color: var(--gesso);
-}
-
-.receipt-cells {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 20px;
-  font-size: 14px;
-  color: var(--ink-2);
-}
-
-.receipt-why {
-  font-family: var(--sans);
-  font-size: 16px;
-  color: var(--ink);
-}
-
-.demo-lw .flag,
-.demo-lw .receipt-why {
-  transition: opacity 0.35s var(--ease), transform 0.3s var(--ease);
-}
-
-.demo-lw .flag {
-  justify-self: start;
-}
-
-.demo-lw[data-state="idle"] .flag,
-.demo-lw[data-state="idle"] .receipt-why {
-  opacity: 0;
-  transform: scale(1.12);
-}
-
-.demo-lw[data-state="flagged"] .receipt-row:nth-child(2) .flag {
-  transition-delay: 0.5s;
-}
-
-.demo-lw[data-state="flagged"] .receipt-row:nth-child(2) .receipt-why {
-  transition-delay: 0.7s;
-}
-
-.demo-lw[data-state="flagged"] .receipt-row:nth-child(3) .flag {
-  transition-delay: 1.1s;
-}
-
-.demo-lw[data-state="flagged"] .receipt-row:nth-child(3) .receipt-why {
-  transition-delay: 1.3s;
-}
-
-.demo-lw .demo-caption .cap-flagged {
-  visibility: visible;
-}
-
+/* Replay button (demos and the Returning Passage sweep) */
 .replay {
   display: none;
   margin-top: 10px;
@@ -1661,206 +1377,9 @@ html:not(.is-scrub) .step[data-step="3"] {
   margin-top: 6px;
 }
 
-/* Family */
-.family {
-  border-top: 1px solid var(--gesso-line);
-}
-
-.principles {
-  max-width: 760px;
-  margin-top: 26px;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 10px;
-  font-size: 18px;
-}
-
-.principles li {
-  position: relative;
-  padding-left: 26px;
-}
-
-.principles li::before {
-  content: "";
-  position: absolute;
-  left: 2px;
-  top: 0.72em;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-.table-scroll {
-  margin-top: 40px;
-}
-
-.family-asof {
-  margin-top: 14px;
-}
-
-.family-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 16px;
-}
-
-.family-table th,
-.family-table td {
-  padding: 16px 14px 16px 0;
-  border-bottom: 1px solid var(--gesso-line);
-  text-align: left;
-  vertical-align: top;
-}
-
-.family-table thead th {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink-2);
-  border-bottom-color: var(--ink-3);
-}
-
-.family-table tbody th {
-  font-family: var(--mono);
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.family-table tbody th a {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-
-@media (max-width: 680px) {
-  .family-table,
-  .family-table tbody,
-  .family-table tr,
-  .family-table th,
-  .family-table td {
-    display: block;
-  }
-
-  .family-table thead {
-    display: none;
-  }
-
-  .family-table tr {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--gesso-line);
-  }
-
-  .family-table th,
-  .family-table td {
-    border: 0;
-    padding: 2px 0;
-  }
-
-  .family-table tbody th {
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .family-table td::before {
-    content: attr(data-label) "：";
-    color: var(--ink-2);
-    font-size: 14px;
-  }
-
-  :lang(en) .family-table td::before {
-    content: attr(data-label) ": ";
-  }
-}
-
 /* ==========================================================================
-   PUNCTUM (night)
+   STARRY NIGHT (night)
    ========================================================================== */
-
-.stage-figure {
-  margin-top: clamp(36px, 6vh, 64px);
-}
-
-.stage {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  border-radius: 20px;
-  overflow: hidden;
-  background:
-    radial-gradient(70% 60% at 50% 45%, rgba(29, 78, 216, 0.18), transparent 70%),
-    var(--night-2);
-}
-
-.stage-fallback,
-.stage-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.stage-fallback {
-  object-fit: contain;
-  transition: opacity 0.6s var(--ease);
-}
-
-.stage-canvas {
-  display: none;
-}
-
-.js .stage-canvas {
-  display: block;
-}
-
-.js .stage.is-ready .stage-fallback {
-  opacity: 0;
-}
-
-.stage-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px 28px;
-  margin-top: 18px;
-}
-
-.range {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  flex: 1 1 240px;
-  max-width: 420px;
-  min-height: 44px;
-  font-size: 15px;
-  color: var(--night-ink-2);
-}
-
-.range input {
-  flex: 1;
-  min-width: 0;
-  accent-color: var(--gold);
-  cursor: pointer;
-}
-
-.stage-caption {
-  margin-top: 14px;
-  font-size: 15px;
-  color: var(--night-ink-2);
-}
-
-/* Column widths follow the two frames' aspect ratios (556/716 and 16/9),
-   so both pictures come out the same height. */
-.compare {
-  display: grid;
-  grid-template-columns: 7fr 16fr;
-  gap: 18px;
-  margin-top: clamp(56px, 9vh, 96px);
-}
-
-@media (max-width: 599px) {
-  .compare {
-    grid-template-columns: 1fr;
-  }
-}
 
 .shot {
   margin: 0;
@@ -1949,12 +1468,495 @@ html:not(.is-scrub) .step[data-step="3"] {
   margin-top: 16px;
 }
 
-.punctum .links {
-  margin-top: clamp(40px, 7vh, 72px);
+.surface-night .kicker-ver {
+  border-color: var(--night-line);
+  color: var(--night-ink-2);
 }
 
-.punctum .fine-center {
+.surface-night .tool-body {
+  color: var(--night-ink-2);
+}
+
+/* Column widths follow the frames' aspect ratios (1.25, 16/9, 16/9), so all
+   three come out the same height; on phones they stack. */
+.triptych {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.778fr) minmax(0, 1.778fr);
+  margin-top: clamp(36px, 6vh, 64px);
+}
+
+@media (max-width: 599px) {
+  .triptych {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.shots-note {
+  margin-top: 12px;
+}
+
+.starry .tool-body {
+  margin-top: clamp(28px, 5vh, 44px);
+}
+
+.sn-facts {
+  max-width: 760px;
+  margin-top: 12px;
+}
+
+.gallery-lead {
+  max-width: 760px;
   margin-top: 10px;
+  color: var(--night-ink-2);
+}
+
+/* Links inside running text stay inline. */
+.gallery-lead .text-link {
+  display: inline;
+  min-height: 0;
+  color: var(--night-ink);
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   WORKS (night)
+   ========================================================================== */
+
+.work-grid {
+  list-style: none;
+  margin: clamp(36px, 6vh, 64px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+@media (min-width: 700px) {
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.work-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--night-line);
+  background: var(--night-2);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.work-card:hover,
+.work-card:focus-within {
+  border-color: rgba(233, 185, 73, 0.6);
+}
+
+.work-card:hover {
+  transform: translateY(-2px);
+}
+
+.work-art {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.work-art img,
+.work-art .pa-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-art-ed {
+  background: var(--gesso-panel);
+}
+
+.work-art-ed img {
+  object-position: 50% 12%;
+}
+
+.work-art-ps {
+  background: var(--sand-bg);
+}
+
+.work-art-cw {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6px;
+  padding: clamp(16px, 4vw, 32px);
+  background: var(--gesso-panel);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(13px, 1.7vw, 18px);
+}
+
+.wa-line {
+  white-space: pre;
+}
+
+.wa-del {
+  color: var(--ink-2);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.wa-add {
+  color: var(--signal);
+  background-image: linear-gradient(transparent 56%, rgba(233, 185, 73, 0.6) 56%, rgba(233, 185, 73, 0.6) 92%, transparent 92%);
+}
+
+.work-art-cw .flag {
+  margin-top: 10px;
+}
+
+.work-body {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px 22px;
+}
+
+.work-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  font-size: 13px;
+  color: var(--night-ink-2);
+}
+
+.work-status-wip {
+  color: var(--sand-gold);
+}
+
+.work-name {
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.3;
+}
+
+.work-link {
+  text-decoration: none;
+  color: var(--night-ink);
+}
+
+/* The whole card follows the link in its heading. */
+.work-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.work-line {
+  font-size: 16px;
+  color: var(--night-ink-2);
+}
+
+/* ==========================================================================
+   EDITORIAL DOLL (gesso)
+   ========================================================================== */
+
+.looks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 22px);
+  max-width: 980px;
+  margin-top: clamp(36px, 6vh, 64px);
+}
+
+.look {
+  margin: 0;
+}
+
+.look .frame {
+  aspect-ratio: 2 / 3;
+  border-radius: 14px;
+  border: 1px solid var(--gesso-line);
+  background: var(--gesso-panel);
+}
+
+.look figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.look-no {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.looks-note {
+  margin-top: 14px;
+}
+
+.atelier .tool-body {
+  margin-top: clamp(28px, 5vh, 44px);
+}
+
+/* ==========================================================================
+   THE RETURNING PASSAGE (sand)
+   ========================================================================== */
+
+.surface-sand .kicker {
+  color: var(--sand-ink-2);
+}
+
+.surface-sand .kicker-name {
+  color: var(--sand-gold);
+}
+
+.surface-sand .kicker-ver {
+  border-color: rgba(211, 178, 124, 0.45);
+  color: var(--sand-gold);
+}
+
+.surface-sand .lead,
+.surface-sand .tool-body,
+.surface-sand .fine {
+  color: var(--sand-ink-2);
+}
+
+.surface-sand .limits {
+  border-left-color: var(--sand-gold);
+  color: var(--sand-ink);
+}
+
+.surface-sand .replay {
+  border-color: rgba(237, 226, 207, 0.4);
+}
+
+/* The work's own title face: system serifs, as in its docs/DESIGN.md. */
+.passage .display {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Noto Serif TC", "Noto Serif CJK TC", PMingLiU, serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.passage-art {
+  margin-top: clamp(36px, 6vh, 64px);
+}
+
+.passage-art .pa-svg {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid var(--sand-line);
+}
+
+.pa-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--sand-ink-2);
+}
+
+.pa-caption .replay {
+  margin-top: 0;
+}
+
+/* Glyph layers: lit lower lip, dark groove, glow. The plain rules are the
+   resting picture ("final"); "idle" is before the sweep, "play" runs it. */
+.pa-glyph .g-hi {
+  stroke: #9c8463;
+  stroke-width: 4;
+  opacity: 0.85;
+}
+
+.pa-glyph .g-cut {
+  stroke: #0b0806;
+  stroke-width: 4;
+}
+
+.pa-glyph .g-halo {
+  stroke: var(--sand-gold);
+  stroke-width: 12;
+  opacity: 0;
+}
+
+.pa-glyph .g-lit {
+  stroke: #f6dfaa;
+  stroke-width: 2.2;
+  opacity: 0;
+}
+
+.pa-glyph.is-last .g-halo {
+  opacity: 0.3;
+}
+
+.pa-glyph.is-last .g-lit {
+  opacity: 0.95;
+}
+
+.pa-band {
+  opacity: 0;
+}
+
+.passage-art[data-state="idle"] .g-hi {
+  opacity: 0.22;
+}
+
+.passage-art[data-state="idle"] .is-last .g-halo,
+.passage-art[data-state="idle"] .is-last .g-lit {
+  opacity: 0;
+}
+
+/* The band moves at a constant speed; each glyph's --d is when it reaches
+   that glyph, so the glyphs wake in the order the light passes them. */
+.passage-art[data-state="play"] .pa-band {
+  animation: pa-sweep 4.8s linear both;
+}
+
+.passage-art[data-state="play"] .g-hi {
+  animation: pa-groove 1.2s var(--ease) var(--d, 0s) both;
+}
+
+.passage-art[data-state="play"] .g-halo {
+  animation: pa-halo 2.6s var(--ease) var(--d, 0s) both;
+}
+
+.passage-art[data-state="play"] .g-lit {
+  animation: pa-lit 2.6s var(--ease) var(--d, 0s) both;
+}
+
+.passage-art[data-state="play"] .is-last .g-halo {
+  animation-name: pa-halo-stay;
+}
+
+.passage-art[data-state="play"] .is-last .g-lit {
+  animation-name: pa-lit-stay;
+}
+
+@keyframes pa-sweep {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1100px);
+    opacity: 0;
+  }
+}
+
+@keyframes pa-groove {
+  from {
+    opacity: 0.22;
+  }
+  to {
+    opacity: 0.85;
+  }
+}
+
+@keyframes pa-halo {
+  0% {
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pa-lit {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pa-halo-stay {
+  0% {
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes pa-lit-stay {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.95;
+  }
+}
+
+.sample {
+  margin-top: clamp(32px, 5vh, 48px);
+}
+
+.sample-label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sand-gold);
+}
+
+.sample-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.sample-steps li {
+  counter-increment: step;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid var(--sand-line);
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--sand-ink);
+}
+
+.sample-steps li::before {
+  content: counter(step);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--sand-gold);
+}
+
+.passage .tool-body {
+  margin-top: clamp(28px, 5vh, 44px);
+}
+
+.ps-facts {
+  margin-top: 14px;
 }
 
 /* ==========================================================================
@@ -2078,13 +2080,12 @@ html:not(.is-scrub) .step[data-step="3"] {
     height: 210svh;
   }
 
-  .tl-events li {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 4px;
+  .look figcaption {
+    font-size: 14px;
   }
 
-  .stage {
-    aspect-ratio: 4 / 5;
+  .look-no {
+    display: none;
   }
 
   .seg {
@@ -2114,23 +2115,13 @@ html:not(.is-scrub) .step[data-step="3"] {
   }
 }
 
-/* Before the canvas is ready (or without JS), crop the phone fallback to the
-   painting instead of letterboxing a 16:9 screenshot inside a 4:5 box. */
-@media (max-width: 599px) {
-  .stage-fallback {
-    object-fit: cover;
-    padding: 20px;
-  }
-}
-
 /* Windows High Contrast and other forced-colour modes. */
 @media (forced-colors: active) {
   .seg-btn {
     border: 1px solid ButtonText;
   }
 
-  .seg .seg-btn[aria-pressed="true"],
-  .surface-night .seg .seg-btn[aria-pressed="true"] {
+  .seg .seg-btn[aria-pressed="true"] {
     forced-color-adjust: none;
     background: Highlight;
     color: HighlightText;
@@ -2147,11 +2138,12 @@ html:not(.is-scrub) .step[data-step="3"] {
     animation: none !important;
   }
 
-  .pill:hover {
+  .pill:hover,
+  .work-card:hover {
     transform: none;
   }
 
-  /* The ledgerwash demo already rests on its final state; nothing to replay. */
+  /* The light sweep already rests on its final state; nothing to replay. */
   .js .replay {
     display: none;
   }

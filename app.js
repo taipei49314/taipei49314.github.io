@@ -9,12 +9,13 @@
  *      text is the HTML itself; it is captured at load and restored on toggle.
  *   2. Mode: "is-scrub" (scroll-driven hero) or "is-static" (reduced motion,
  *      no IntersectionObserver or no sticky). Without JS the page is static.
- *   3. createAnamorph(): cuts a PUNCTUM CI screenshot into tiles, places each
- *      tile on the ray from the painter's eye E at its own depth, and projects
- *      them with a real perspective camera. At E the tiles land exactly on the
- *      painting; anywhere else it opens up in depth. Renders on demand only.
- *   4. The hero (scroll), the PUNCTUM stage (slider), the three tool demos,
- *      the header and the copy buttons.
+ *   3. createAnamorph(): cuts a starry-night-3d CI screenshot into tiles,
+ *      places each tile on the ray from the painter's eye E at its own depth,
+ *      and projects them with a real perspective camera. At E the tiles land
+ *      exactly on the painting; anywhere else it opens up in depth. Renders on
+ *      demand only.
+ *   4. The hero (scroll), the checkwash demo, the Returning Passage light
+ *      sweep, the header and the copy buttons.
  */
 (function () {
   "use strict";
@@ -34,36 +35,54 @@
   const EN = {
     "meta.title": "Nelson — Every stroke has to line up",
     "meta.desc":
-      "Nelson (@taipei49314), an independent developer in Taipei. Tools that check what AI coding agents hand in: checkwash (code changes), pinwash (agent sessions), ledgerwash (work ledgers). And a Starry Night you can walk into: PUNCTUM.",
+      "Nelson (@taipei49314), an independent developer in Taipei. checkwash flags code changes that weaken tests; The Starry Night from One Viewpoint is a painting you can walk into; Editorial Doll is a digital styling atelier; The Returning Passage is a journey through a stone chamber, still in progress.",
 
-    "nav.skip": "Skip to the tools",
+    "nav.skip": "Skip to the works",
     "nav.label": "Primary",
-    "nav.tools": "Tools",
+    "nav.works": "Works",
     "nav.contact": "Contact",
     "nav.lang": "中文",
     "nav.langLabel": "切換成中文",
     "nav.langCode": "zh-Hant",
 
+    "name.sn": "The Starry Night from One Viewpoint",
+    "name.snShort": "The Starry Night",
+    "name.ps": "The Returning Passage",
+
     "hero.alt":
-      "The Starry Night as PUNCTUM renders it from point E: swirling sky, moon, cypress and village.",
+      "The Starry Night as starry-night-3d renders it from point E: swirling sky, moon, cypress and village.",
     "hero.canvasLabel":
       "Pieces of the painting sit at different depths; as you scroll, the camera walks to point E, where they form The Starry Night.",
     "hero.eyebrow": "Nelson · independent developer in Taipei",
     "hero.title": "Every stroke<br />has to line up.",
     "hero.sub":
-      "I write tools that check what AI coding agents hand in, and I built a Starry Night you can walk into.",
-    "hero.ctaTools": "See the tools ›",
+      "I write a tool that checks code changes, and I made a Starry Night you can walk into, a digital styling atelier, and a journey through a stone chamber that is still in progress.",
+    "hero.ctaWorks": "See the work ›",
     "hero.cue": "Scroll to stand where the painter stood",
     "hero.moving":
       "Keep going. Each piece stays on its own ray; you are the one moving, and the closer you get to E, the closer they come to their places in the painting.",
     "hero.locked":
       'Right here: point E. Only from this one point do the pieces form The Starry Night.<sup><a href="#fn-1" id="ref-1a">1</a></sup>',
-    "hero.bridgeTitle": "So does<br />every “pass.”",
-    "hero.bridgeSub":
-      "A passing test, an agent saying “done,” a closed task: each one should line up with evidence.",
-    "hero.mapCw": "A passing test",
-    "hero.mapPw": "An agent saying “done”",
-    "hero.mapLw": "A closed task",
+    "hero.bridgeTitle": "So does<br />everything I make.",
+    "hero.bridgeSub": "Four works, each one lining up with one thing.",
+    "hero.mapCw": "A pass, with its evidence",
+    "hero.mapSn": "Strokes, with one viewpoint",
+    "hero.mapEd": "A look, with the person wearing it",
+    "hero.mapPs": "Inscriptions, with the light",
+
+    "works.title": "Four works.",
+    "works.lead": "A tool, a painting, an atelier, and a journey still being built.",
+    "works.cwType": "Tool",
+    "works.cwLine": "Catches tests that were quietly loosened.",
+    "works.snType": "Interactive work",
+    "works.snStatus": "Live online",
+    "works.snLine": "About 181,000 strokes that form Van Gogh's painting from exactly one point.",
+    "works.edType": "Styling atelier",
+    "works.edStatus": "Showcase",
+    "works.edLine": "Turns outfit ideas into a styling proposal.",
+    "works.psType": "Interactive narrative",
+    "works.psStatus": "In progress",
+    "works.psLine": "A sweep of light wakes the inscriptions on a stone wall, one by one.",
 
     "demo.steps": "Example steps",
     "facts.version": "Version",
@@ -92,10 +111,10 @@
     "cw.limits": "When nothing fires, it says “no known tampering pattern detected.” Not “no cheating.”",
     "cw.status": "alpha, pre-1.0",
     "cw.try":
-      "Try it: download checkwash.pyz from the v0.8.0 release, then check your last commit from the repo root.",
-    "cw.linkRelease": "Download v0.8.0 ↗",
+      "Try it: download checkwash.pyz from the v0.10.0 release, run the built-in offline examples, then check your last commit from the root of your repo.",
+    "cw.linkRelease": "Download v0.10.0 ↗",
     "cw.linkLimits": "Known limits ↗",
-    "cw.pipx": "You can also install it with pipx install checkwash==0.8.0 and run checkwash check HEAD~1..HEAD.",
+    "cw.pipx": "You can also install it with pipx install checkwash==0.10.0 and run checkwash check HEAD~1..HEAD.",
     "cw.buildersTitle": "Building a PR-review or CI tool?",
     "cw.buildersBody":
       "checkwash is designed to be embedded in tools like yours. Run it once and read the JSON; there is SARIF output and a GitHub Action too. To actually block merges, make the checkwash status check required. Formats may still change before 1.0, so pin the exact version in CI, and tell me what you'd need.",
@@ -107,111 +126,82 @@
     "cw.linkEmbed": "Embedding guide ↗",
     "cw.linkSchema": "Findings JSON schema ↗",
     "cw.linkStability": "Compatibility notes ↗",
-    "cw.mainNote": "The embedding guide and the findings schema live only on main; they are not in the v0.8.0 tag.",
 
-    "pw.kicker": "reads one agent session",
-    "pw.title": "Pin where<br />it started.",
-    "pw.lead":
-      "Before the agent starts, pinwash records the current commit as BASE. When it's done, everything it changed, committed or not, is compared against BASE.",
-    "pw.btnEvents": "What happened",
-    "pw.btnPlain": "Last step only",
-    "pw.btnPinned": "From BASE",
-    "pw.ev1": "adds an exemption (.pinwash/allow.toml)",
-    "pw.ev2": "uncommitted: the Stop hook that guards the work now runs exit&nbsp;0",
-    "pw.missed": "last step only: not flagged",
-    "pw.capEvents":
-      "The agent commits an exemption, then, without committing, rewrites the Stop hook that guards its work to exit&nbsp;0.",
-    "pw.capPlain":
-      "Compare only HEAD with the worktree and exemptions are read from HEAD: the agent's own new exemption is trusted, and the hook change gets through. Check only the last commit and you never see the uncommitted edit.",
-    "pw.capPinned":
-      'pinwash runs three comparisons: BASE..HEAD, BASE..WORKTREE and HEAD..WORKTREE. The two that start at BASE read exemptions only from the pinned BASE, so the hook rewritten to exit&nbsp;0 is flagged in BASE..WORKTREE, and the new exemption is listed too, waiting for a human to review it.<sup><a href="#fn-2" id="ref-2b">2</a></sup>',
-    "pw.body":
-      'It watches the things that decide whether “done” can be trusted: CI workflows, agent hooks, exemption rules, required status checks. pinwash gives a verdict, but it doesn\'t block anything for you.<sup><a href="#fn-4" id="ref-4a">4</a></sup>',
-    "pw.status": "Alpha (pre-release), accepted on Linux only so far",
-    "pw.try":
-      "Try it: install it where the agent can't reach. Run pinwash session start before the agent begins, and pinwash session review once the agent and everything it launched have stopped.",
-    "pw.linkQuickstart": "Quickstart ↗",
+    "sn.kicker": "a painting you can walk into",
+    "sn.title": "About 181,000 strokes.<br />One place to stand.",
+    "sn.lead":
+      "About 181,000 brushstrokes are scattered through 3D space, up to 250 km deep. Only from the painter's eye, point E, do they line up into Van Gogh's The Starry Night; step aside and the painting comes apart into a world.",
+    "sn.eye": "From E",
+    "sn.eyeCap": "the strokes form the painting",
+    "sn.eyeAlt": "From the painter's eye E: the strokes form the whole Starry Night.",
+    "sn.aside": "Step aside",
+    "sn.asideCap": "the cypress slides in front of the sky and hides a swirl",
+    "sn.asideAlt":
+      "Some tens of metres away from E: the cypress moves in front of the sky and hides one of the swirls, and the village shifts.",
+    "sn.sky": "Inside the sky",
+    "sn.skyCap": "the swirl is a funnel of brushstrokes",
+    "sn.skyAlt": "Inside the sky: the swirl is a funnel of brushstrokes pointing at the eye.",
+    "sn.shotsNote":
+      "All three were rendered from the starry-night-3d code in headless Chrome on an NVIDIA laptop GPU, with the UI hidden (main 278293e).",
+    "sn.body":
+      "Each stroke has one free value: its distance from E. The farther away it is, the bigger it is drawn, so from E it covers exactly its place in the painting. Paint order becomes depth: the last touches, the cypress and the village, are nearest, and the underpainting is 250 km away. The opening is a 96-second, 10-shot camera loop: the canvas paints itself in, the frame slides away, the camera climbs the cypress, passes through Venus, falls into a swirl and flies back to E.",
+    "sn.open": "Open it ↗",
+    "sn.single": "Single-file version ↗",
+    "sn.facts":
+      "Drag to look, W A S D to fly, Space to return to E. TypeScript · three.js (WebGL 2) · MIT. No textures, models or audio files; everything is generated in code. Needs a browser with WebGL 2.",
+    "sn.galleryTitle": "The same engine paints 29 more",
+    "sn.galleryLead":
+      'Reach them from the bar at the top of the work or by URL: <a class="text-link" href="https://taipei49314.github.io/starry-night-3d/?mode=witness" target="_blank" rel="noopener noreferrer">witness</a> walks through five chapters of his life, <a class="text-link" href="https://taipei49314.github.io/starry-night-3d/?mode=odyssey" target="_blank" rel="noopener noreferrer">odyssey</a> flies through all 30 paintings in one 900-second flight, and <a class="text-link" href="https://taipei49314.github.io/starry-night-3d/?mode=atlas" target="_blank" rel="noopener noreferrer">atlas</a> maps the 30 worlds.',
+    "sn.g1": "Starry Night Over the Rhône",
+    "sn.g2": "Sunflowers",
+    "sn.g3": "Wheatfield with Crows",
+    "sn.g4": "Café Terrace at Night",
+    "sn.g5": "Wheat Field with Cypresses",
+    "sn.g6": "The Bedroom in Arles, away from E",
+    "sn.g6alt": "The Bedroom in Arles, with the camera away from point E",
+    "sn.galleryNote":
+      "Numbers are the stroke count of each world. Images and numbers come from the starry-night-3d CI screenshots and verification report (main 015d0fb, 2026-10-19), rendered in software.",
 
-    "lw.kicker": "reads a work ledger",
-    "lw.title": "Done?<br />Show the receipts.",
-    "lw.lead":
-      "An agent hands off a task marked done. ledgerwash reads the work ledger and handoff receipts at a pinned commit, read-only, and flags closures the evidence can't support.",
-    "lw.earliest": "earliest operation receipt in the ledger: 2026-04-01",
-    "lw.r1closed": "closed 2026-10-17",
-    "lw.r1receipts": "0 operation receipts",
-    "lw.r1why": "Marked done, without a single operation receipt.",
-    "lw.r2closed": "closed 2026-03-02",
-    "lw.r2receipts": "0 operation receipts",
-    "lw.r2born": "task file created 2026-10-12",
-    "lw.r2why":
-      "The closing date is earlier than the receipt system itself, but the task file's own git history says it was created later.",
-    "lw.cap":
-      'Both are marked DONE and neither has a receipt; ledgerwash tells the two cases apart by the closing time. Task IDs and dates are illustrative.<sup><a href="#fn-2" id="ref-2c">2</a></sup>',
-    "lw.body":
-      '“checkwash guards the diff; ledgerwash guards the ledger.” For now it reads one ledger layout (the ec-ledger adapter); a repo with no ledger is reported as not covered, never as clean.<sup><a href="#fn-5" id="ref-5a">5</a></sup>',
-    "lw.status": "pre-1.0",
-    "lw.try": "Try it: once it's installed, write down the commit SHA you want to judge and scan pinned to that commit.",
-    "lw.source": "From a source checkout, the README uses uv: uv run ledgerwash scan <repo> --at <pinned-sha>.",
+    "ed.kicker": "a digital styling atelier",
+    "ed.ver": "Showcase · iPad version in preparation",
+    "ed.title": "Turn outfit ideas<br />into a proposal.",
+    "ed.lead":
+      "Clothes, hair and accessories, tried on one fictional muse until the look works. Every step can be undone; a look can be named and saved, then exported as an image to talk about.",
+    "ed.l1": "Daylight Tailoring",
+    "ed.l1Alt": "Daylight Tailoring: a full-length look with a camel double-breasted jacket, charcoal trousers and an oxblood bag.",
+    "ed.l2": "Evening Silhouette",
+    "ed.l2Alt": "Evening Silhouette: a sienna bias-cut midi dress worn with gold earrings.",
+    "ed.l3": "Olive Afternoon",
+    "ed.l3Alt": "Olive Afternoon: an olive jacket over a rust knife-pleat skirt, with an oxblood bag.",
+    "ed.looksNote": "All three are looks rendered by Editorial Doll itself.",
+    "ed.body":
+      "Every garment, shoe and accessory is versioned: old and new versions sit side by side, and switching to a new one can be undone. The interface is in Chinese and English, and the muse is entirely fictional.",
+    "ed.status":
+      "Editorial Doll isn't available for download. To talk about a styling proposal or working together, write to me.",
+    "ed.film": "Watch the 34-second demo ↗",
+    "ed.site": "Showcase page ↗",
 
-    "fam.title": "Three tools,<br />each on its own.",
-    "fam.lead": "They are not a pipeline; each one watches one place. They share only a few rules:",
-    "fam.p1": "They run on your machine. Analysis uses no network and sends your code nowhere.",
-    "fam.p2": "Same input, same answer. No language model guessing.",
-    "fam.p3": "They never run the code they check.",
-    "fam.p4": "They never claim more than they do. A pass isn't proof, and pre-1.0 says pre-1.0.",
-    "fam.colTool": "Tool",
-    "fam.colReads": "Reads",
-    "fam.colFlags": "Flags",
-    "fam.colStatus": "Status",
-    "fam.asOf": "Versions and status as of 2026-10-19.",
-    "fam.cwReads": "the git diff of one code change",
-    "fam.cwFlags": "weakened tests and CI checks",
-    "fam.cwStatus": "v0.8.0 · alpha",
-    "fam.pwReads": "one agent session (BASE, HEAD, worktree)",
-    "fam.pwFlags": "weakened gates (CI, hooks, required checks), new exemptions",
-    "fam.pwStatus": "v0.1.1 · Alpha",
-    "fam.lwReads": "the work ledger and handoff receipts",
-    "fam.lwFlags": "closures the evidence can't support",
-    "fam.lwStatus": "v0.5.0 · pre-1.0",
-
-    "pn.title": "About 181,000 strokes.<br />One place to stand.",
-    "pn.lead":
-      "Thirty Van Gogh paintings, made into thirty 3D worlds you can walk into. Every stroke sits on a ray from point E and is painted bigger the farther away it is, so from E each one looks exactly the right size and the painting comes back together. Step away from E and the painting opens into a world.",
-    "pn.stageAlt": "Road with Cypress and Star as PUNCTUM renders it from point E.",
-    "pn.canvasLabel":
-      "Road with Cypress and Star, cut into small pieces at different depths. Move the camera to see the painting open up in space as it leaves E.",
-    "pn.viewLabel": "Preset viewpoints",
-    "pn.poseE": "From E",
-    "pn.poseLift": "Lift the camera",
-    "pn.poseWalk": "Walk in",
-    "pn.slider": "Camera position",
-    "pn.stageCaption":
-      'A 2D sketch made by cutting a PUNCTUM CI screenshot into many small pieces; the real work renders live with three.js.<sup><a href="#fn-1" id="ref-1b">1</a></sup>',
-    "pn.cmpEAlt": "Road with Cypress and Star seen from point E: the strokes form the whole painting.",
-    "pn.cmpE": "From E",
-    "pn.cmpECap": "XXIV Road with Cypress and Star, 57,450 strokes",
-    "pn.cmpOffAlt":
-      "The same painting with the camera away from point E: the strokes of sky, cypress and ground scatter and show the space behind the painting.",
-    "pn.cmpOff": "Away from E",
-    "pn.cmpOffCap": "the same painting, seen from the side",
-    "pn.galleryTitle": "Six of the thirty worlds",
-    "pn.g1": "Starry Night Over the Rhône",
-    "pn.g2": "Sunflowers",
-    "pn.g3": "Wheatfield with Crows",
-    "pn.g4": "Café Terrace at Night",
-    "pn.g5": "Wheat Field with Cypresses",
-    "pn.g6": "The Bedroom in Arles, away from E",
-    "pn.g6alt": "The Bedroom in Arles, with the camera away from point E",
-    "pn.galleryNote":
-      "Numbers are the stroke count of each world. Images and numbers come from the starry-night-3d CI screenshots and verification report (main 015d0fb, 2026-10-19).",
-    "pn.open": "Open the live demo ↗",
-    "pn.single": "Single-file version ↗",
-    "pn.facts":
-      "TypeScript · three.js r186 (WebGL 2) · MIT. No textures, models or audio files; even the sound is synthesized live. Needs a browser with WebGL 2.",
+    "ps.kicker": "interactive narrative",
+    "ps.title": "Where the light passes,<br />the words wake up.",
+    "ps.lead":
+      "A WebGL journey into a stone chamber under the sand, narrated in Chinese and English. The inscriptions on the wall start as faint grooves; when a sweep of light reaches into them they light up one by one, and one of them stays.",
+    "ps.artLabel":
+      "Illustration: eight inscriptions on a dark stone wall. A band of light sweeps from left to right, the inscriptions light up in turn, and one stays lit.",
+    "ps.artCap": "An illustration, not a frame from the work.",
+    "ps.sampleLabel": "The two-minute sample",
+    "ps.s1": "Entrance",
+    "ps.s2": "Inscribed antechamber",
+    "ps.s3": "Light reveals the words",
+    "ps.s4": "A lingering mark, a strange sound",
+    "ps.s5": "Silence",
+    "ps.body":
+      "The stone is generated entirely in code: bedding, grain, worn block edges and drifted sand are all shaders, with no external textures. The inscriptions are cut into the stone, and what lights up is the bottom of each groove, not the surface. The two-minute sample is finished; the full piece is planned as seven parts, about 13 minutes long.",
+    "ps.limits": "There is no public version yet and nothing to try online. When it's ready, it will be here.",
+    "ps.facts": "TypeScript · three.js (WebGL 2) · narration in Chinese and English",
 
     "ct.title": "Write to me.",
     "ct.lead":
-      "Building a PR-review or CI tool and want to plug checkwash in? Hit a false positive or a miss on your own repo? Or just want to talk about procedural painting? All welcome, in English or 中文.",
+      "Want to plug checkwash into your PR review or CI? Hit a false positive or a miss on your own repo? Want to talk about a styling proposal with Editorial Doll, or just about procedural painting? All welcome, in English or 中文.",
     "ct.mail": "Email me",
     "ct.copy": "Copy address",
     "ct.issues": "Report a problem:",
@@ -219,20 +209,14 @@
 
     "fn.title": "Notes",
     "fn.1":
-      "The two moving pictures on this page are 2D sketches: CI screenshots of PUNCTUM cut into many small pieces and put back into 3D space. PUNCTUM itself renders live with three.js (WebGL 2): about 181,000 strokes in The Starry Night, roughly 47,000 to 130,000 in the other worlds.",
+      "The moving picture at the top of this page is a 2D sketch: a CI screenshot of The Starry Night from starry-night-3d, cut into many small pieces and put back into 3D space. The work itself renders about 181,000 strokes live with three.js (WebGL 2).",
     "fn.2":
-      "The diffs, task IDs and dates on this page are illustrative. Rule names come from each project's SPEC; see each project's README for the real output.",
+      "The diff on this page is illustrative. The rule name comes from checkwash's SPEC; see its README for the real output.",
     "fn.3":
       "checkwash flags known patterns of weakened tests. No findings doesn't mean the code is correct, and exit&nbsp;2 is an analysis error, not a pass.",
-    "fn.4":
-      "pinwash is Alpha (v0.1.1 pre-release). It gives a verdict but doesn't block anything for you, and no findings doesn't mean your checks actually ran. Package acceptance so far covers Linux only; Windows and macOS are not yet validated.",
-    "fn.5":
-      "ledgerwash checks only evidence that can be verified mechanically. It compares the dates the ledger claims, not trusted timestamps, and exit&nbsp;0 doesn't mean a ledger is honest.",
     "fn.back": "Back to text",
-    "fn.backPn": "Back to the PUNCTUM sketch",
-    "fn.backCw": "a, back to the checkwash example",
-    "fn.backPw": "b, back to the pinwash example",
-    "fn.backLw": "c, back to the ledgerwash example",
+    "fn.backHero": "Back to the opening picture",
+    "fn.backCw": "Back to the checkwash example",
     "fn.colophon":
       "© 2026 Nelson (@taipei49314) · Plain HTML, CSS and JavaScript, no dependencies. The original Starry Night was painted by Vincent van Gogh in 1889.",
     "fn.top": "Back to top ↑",
@@ -246,9 +230,6 @@
       selectedShort: "已選取",
       emailCopied: "信箱已複製。",
       selected: "已選取，請按 Ctrl+C（Mac 是 ⌘C）複製。",
-      poseE: "從 E 看",
-      lifting: "抬起鏡頭",
-      walking: "走進去",
     },
     en: {
       copy: "Copy",
@@ -256,9 +237,6 @@
       selectedShort: "Selected",
       emailCopied: "Address copied.",
       selected: "Selected. Press Ctrl+C (⌘C on a Mac) to copy.",
-      poseE: "From E",
-      lifting: "Lifting the camera",
-      walking: "Walking in",
     },
   };
 
@@ -476,7 +454,7 @@
 
     function chooseCols(W) {
       const base = W < 600 ? 24 : W < 1000 ? 34 : 44;
-      return Math.max(MIN_COLS, Math.round(base * (cfg.densityScale || 1)));
+      return Math.max(MIN_COLS, base);
     }
 
     function buildTiles() {
@@ -564,10 +542,10 @@
 
     const tmp = [0, 0, 0];
 
-    // Fit the painting's depth cone (corners at a near and a far depth, plus
-    // E when asked) into the box. At E every corner projects onto the painting
-    // rectangle, so this reduces exactly to lockedRect().
-    function fitView(cam, box, withE) {
+    // Fit the painting's depth cone (corners at a near and a far depth) into
+    // the box. At E every corner projects onto the painting rectangle, so this
+    // reduces exactly to lockedRect().
+    function fitView(cam, box) {
       let minX = Infinity;
       let minY = Infinity;
       let maxX = -Infinity;
@@ -590,7 +568,6 @@
         add((-A / 2) * z, 0.5 * z, z);
         add((A / 2) * z, 0.5 * z, z);
       }
-      if (withE) add(0, 0, 0);
       if (!isFinite(minX) || maxX - minX < 1e-6 || maxY - minY < 1e-6) return null;
       const F = Math.min(box.w / (maxX - minX), box.h / (maxY - minY));
       return {
@@ -625,42 +602,6 @@
       ctx.lineTo(x1, y1);
       ctx.lineTo(x1, y1 - len);
       ctx.stroke();
-      ctx.restore();
-    }
-
-    function drawEyeMarker(cam, view, alpha) {
-      project(cam, 0, 0, 0, tmp);
-      if (tmp[2] <= 0.05) return;
-      const ex = view.ox + (view.F * tmp[0]) / tmp[2];
-      const ey = view.oy + (view.F * tmp[1]) / tmp[2];
-      const far = cfg.fitFar || 5.5;
-      ctx.save();
-      ctx.globalAlpha = alpha * 0.45;
-      ctx.strokeStyle = "#E9B949";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      const corners = [
-        [-A / 2, -0.5],
-        [A / 2, -0.5],
-        [-A / 2, 0.5],
-        [A / 2, 0.5],
-      ];
-      for (let i = 0; i < corners.length; i++) {
-        project(cam, corners[i][0] * far, corners[i][1] * far, far, tmp);
-        if (tmp[2] <= 0.05) continue;
-        ctx.moveTo(ex, ey);
-        ctx.lineTo(view.ox + (view.F * tmp[0]) / tmp[2], view.oy + (view.F * tmp[1]) / tmp[2]);
-      }
-      ctx.stroke();
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = "#E9B949";
-      ctx.beginPath();
-      ctx.arc(ex, ey, 5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.font = "700 15px ui-monospace, Consolas, monospace";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "middle";
-      ctx.fillText("E", ex + 10, ey);
       ctx.restore();
     }
 
@@ -703,22 +644,8 @@
       state.lockedAt = 0;
 
       const cam = makeCamera(state.yaw, state.pitch, cfg.pivotZ || 4);
-      // E only enters the framing gradually: just after it comes in front of
-      // the camera it projects very far away, and fitting it at once would
-      // make the whole view jump.
-      const eyeWeight = cfg.eyeMarker ? clamp01((-state.pitch - 0.3) / 0.4) : 0;
-      let view = fitView(cam, box, false);
+      const view = fitView(cam, box);
       if (!view) return false;
-      if (eyeWeight > 0) {
-        const withE = fitView(cam, box, true);
-        if (withE) {
-          view = {
-            F: lerp(view.F, withE.F, eyeWeight),
-            ox: lerp(view.ox, withE.ox, eyeWeight),
-            oy: lerp(view.oy, withE.oy, eyeWeight),
-          };
-        }
-      }
 
       const tiles = state.tiles;
       const n = tiles.length;
@@ -772,8 +699,6 @@
       }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.globalAlpha = 1;
-
-      if (eyeWeight > 0) drawEyeMarker(cam, view, eyeWeight);
 
       // Adaptive quality, measured on real frame intervals: after a warm-up
       // (page load, image decode, intro), two slow windows in a row ask for
@@ -859,18 +784,6 @@
     const dx = (u - 0.5) / 0.22;
     const dy = (v - 0.33) / 0.13;
     if (dx * dx + dy * dy < 1) return logUniform(5, 9, rnd);
-    return logUniform(3.4, 11, rnd);
-  }
-
-  function roadCypressDepth(u, v, rnd) {
-    if (Math.abs(u - 0.48) < 0.03 + 0.09 * v) return logUniform(1.08, 1.6, rnd);
-    if (v > 0.68) return logUniform(1.4, 3, rnd);
-    if (v > 0.55) return logUniform(2.6, 4.5, rnd);
-    const s1x = (u - 0.21) / 0.13;
-    const s1y = (v - 0.26) / 0.1;
-    const s2x = (u - 0.77) / 0.15;
-    const s2y = (v - 0.22) / 0.12;
-    if (s1x * s1x + s1y * s1y < 1 || s2x * s2x + s2y * s2y < 1) return logUniform(6, 10, rnd);
     return logUniform(3.4, 11, rnd);
   }
 
@@ -1026,6 +939,23 @@
       window.scrollTo(0, top + (STEP_AT[i] + 0.03) * span);
     });
 
+    // Same for links to something inside a step (the footnote's back link):
+    // the browser would scroll to where the sticky stage sits right now, which
+    // can be a later step where that caption is hidden.
+    document.addEventListener("click", (e) => {
+      const link = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!link) return;
+      const target = document.getElementById(link.getAttribute("href").slice(1));
+      const step = target && hero.contains(target) ? target.closest(".step") : null;
+      const span = hero.offsetHeight - window.innerHeight;
+      const i = step ? Number(step.dataset.step) : -1;
+      if (!(span > 0) || !(i >= 0)) return;
+      e.preventDefault();
+      const top = window.scrollY + hero.getBoundingClientRect().top;
+      window.scrollTo(0, top + (STEP_AT[i] + 0.03) * span);
+      target.focus({ preventScroll: true });
+    });
+
     const io = new IntersectionObserver(
       (entries) => {
         inView = entries[entries.length - 1].isIntersecting;
@@ -1053,193 +983,8 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 6. PUNCTUM stage: the camera leaves E
-   * ------------------------------------------------------------------ */
-
-  function punctumPose(s) {
-    const t = clamp01(s / 100);
-    if (t <= 0.5) return { yaw: 0, pitch: -0.95 * easeInOut(t / 0.5) };
-    const k = easeInOut((t - 0.5) / 0.5);
-    return { yaw: 0.62 * k, pitch: lerp(-0.95, -0.3, k) };
-  }
-
-  function initPunctum() {
-    const stage = document.getElementById("punctum-stage");
-    const canvas = document.getElementById("punctum-canvas");
-    const range = document.getElementById("punctum-range");
-    if (!stage || !canvas || !range || !canvas.getContext) return;
-    const fallback = stage.querySelector(".stage-fallback");
-    const buttons = Array.prototype.slice.call(document.querySelectorAll("[data-pose]"));
-
-    const engine = createAnamorph(canvas, {
-      src: "assets/worlds/road-cypress-e.png",
-      crop: { x: 362, y: 2, w: 556, h: 716 },
-      depth: roadCypressDepth,
-      seed: 1890,
-      pivotZ: 3.5,
-      fitNear: 1,
-      fitFar: 7,
-      brackets: true,
-      eyeMarker: true,
-      densityScale: 0.8,
-      onResize: () => request(),
-      fitBox(W, H) {
-        const m = Math.max(14, Math.min(W, H) * 0.06);
-        return { x: m, y: m, w: W - 2 * m, h: H - 2 * m };
-      },
-    });
-
-    let started = false;
-    let inView = false;
-    let raf = 0;
-    let target = Number(range.value) || 0;
-    let current = target;
-    let lastNow = 0;
-    let touched = false;
-    let played = false;
-    let onScreen = false;
-    let visible = null;
-
-    function valueText(v) {
-      const ui = UI[lang];
-      if (v <= 1) return ui.poseE;
-      return (v <= 50 ? ui.lifting : ui.walking) + " " + Math.round(v) + "%";
-    }
-
-    function syncControls() {
-      buttons.forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.pose) === Math.round(target))));
-      range.setAttribute("aria-valuetext", valueText(target));
-    }
-
-    function request() {
-      if (raf) return;
-      if (started && inView && !document.hidden) raf = requestAnimationFrame(frame);
-      else lastNow = 0;
-    }
-
-    function failToPoster() {
-      engine.fail();
-      stage.classList.remove("is-ready");
-      canvas.setAttribute("aria-hidden", "true");
-      if (fallback) fallback.removeAttribute("aria-hidden");
-    }
-
-    function frame(now) {
-      raf = 0;
-      const dt = lastNow ? Math.min(100, now - lastNow) : 0;
-      lastNow = now;
-      if (motionOK()) {
-        current += (target - current) * (1 - Math.pow(0.9, (dt || 16.7) / 16.7));
-        if (Math.abs(target - current) < 0.05) current = target;
-      } else {
-        current = target;
-      }
-      const pose = punctumPose(current);
-      engine.setPose(pose.yaw, pose.pitch);
-      let animating = current !== target;
-      try {
-        if (engine.draw(now, dt)) animating = true;
-      } catch (err) {
-        console.error(err);
-        failToPoster();
-        return;
-      }
-      if (animating) request();
-      else lastNow = 0;
-    }
-
-    function setTarget(v) {
-      target = clamp(v, 0, 100);
-      range.value = String(Math.round(target));
-      syncControls();
-      request();
-    }
-
-    // Play the idea once, the first time the stage is ready and mostly on
-    // screen, unless the visitor has already taken the controls.
-    function maybePlay() {
-      if (played || touched || !onScreen || !engine.ready || !motionOK()) return;
-      if (!root.classList.contains("js")) return;
-      played = true;
-      if (visible) {
-        visible.disconnect();
-        visible = null;
-      }
-      setTimeout(() => !touched && setTarget(50), 700);
-      setTimeout(() => !touched && setTarget(100), 3400);
-      setTimeout(() => !touched && setTarget(50), 6400);
-    }
-
-    range.addEventListener("input", () => {
-      touched = true;
-      setTarget(Number(range.value));
-    });
-    buttons.forEach((b) =>
-      b.addEventListener("click", () => {
-        touched = true;
-        setTarget(Number(b.dataset.pose));
-      })
-    );
-
-    function start() {
-      if (started) return;
-      started = true;
-      engine.load(
-        () => {
-          if (!root.classList.contains("js")) return; // fell back to the static page
-          stage.classList.add("is-ready");
-          if (fallback) fallback.setAttribute("aria-hidden", "true");
-          canvas.removeAttribute("aria-hidden");
-          request();
-          maybePlay();
-        },
-        () => {
-          started = false; // try again the next time the stage comes near
-          failToPoster();
-        }
-      );
-    }
-
-    if ("IntersectionObserver" in window) {
-      const near = new IntersectionObserver(
-        (entries) => {
-          inView = entries[entries.length - 1].isIntersecting;
-          if (inView) {
-            start();
-            request();
-          }
-        },
-        { rootMargin: "600px 0px" }
-      );
-      near.observe(stage);
-      visible = new IntersectionObserver(
-        (entries) => {
-          const e = entries[entries.length - 1];
-          onScreen = e.isIntersecting && e.intersectionRatio >= 0.59;
-          maybePlay();
-        },
-        { threshold: [0, 0.6] }
-      );
-      visible.observe(stage);
-    } else {
-      inView = true;
-      start();
-    }
-
-    window.addEventListener("resize", () => {
-      engine.resize();
-      request();
-    });
-    document.addEventListener("langchange", syncControls);
-    document.addEventListener("visibilitychange", () => {
-      if (!document.hidden) request();
-    });
-    syncControls();
-  }
-
-  /* ------------------------------------------------------------------ *
-   * 7. Tool demos: each plays its story once when it scrolls into view,
-   *    then rests on the final state. Buttons jump to any state.
+   * 6. Demos: each plays its story once when it scrolls into view, then
+   *    rests on the final state. Buttons jump to any state.
    * ------------------------------------------------------------------ */
 
   function initDemo(id, sequence) {
@@ -1323,8 +1068,51 @@
     io.observe(fig);
   }
 
+  // The Returning Passage illustration: the light sweep is CSS animation on
+  // data-state="play"; "final" (the HTML default) is the resting picture.
+  function initSweep(id) {
+    const fig = document.getElementById(id);
+    if (!fig) return;
+
+    function play() {
+      fig.dataset.state = "idle";
+      // Drop the running animations before starting them again.
+      void fig.getBoundingClientRect();
+      fig.dataset.state = "play";
+    }
+
+    let io = null;
+    const replay = fig.querySelector(".replay");
+    if (replay) {
+      replay.addEventListener("click", () => {
+        if (io) {
+          io.disconnect();
+          io = null;
+        }
+        if (motionOK()) play();
+        else fig.dataset.state = "final";
+      });
+    }
+
+    if (!motionOK() || !("IntersectionObserver" in window)) return;
+
+    fig.dataset.state = "idle";
+    io = new IntersectionObserver(
+      (entries) => {
+        const e = entries[entries.length - 1];
+        if (e.isIntersecting && e.intersectionRatio >= 0.39) {
+          io.disconnect();
+          io = null;
+          play();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(fig);
+  }
+
   /* ------------------------------------------------------------------ *
-   * 8. Header: transparent over the top of the hero; colours follow the
+   * 7. Header: transparent over the top of the hero; colours follow the
    *    surface underneath (night or gesso).
    * ------------------------------------------------------------------ */
 
@@ -1363,7 +1151,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 9. Copy buttons
+   * 8. Copy buttons
    * ------------------------------------------------------------------ */
 
   function selectText(node) {
@@ -1424,7 +1212,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 10. Start
+   * 9. Start
    * ------------------------------------------------------------------ */
 
   function applyContact() {
@@ -1453,21 +1241,12 @@
       initLanguage();
       initHeader();
       initHero();
-      initPunctum();
       initDemo("demo-cw", [
         ["before", 0],
         ["after", 1400],
         ["flagged", 3400],
       ]);
-      initDemo("demo-pw", [
-        ["events", 0],
-        ["plain", 3000],
-        ["pinned", 8000],
-      ]);
-      initDemo("demo-lw", [
-        ["idle", 0],
-        ["flagged", 250],
-      ]);
+      initSweep("passage-art");
       initCopy();
     } catch (err) {
       // Anything unexpected: fall back to the static page, which shows the
@@ -1476,13 +1255,12 @@
       root.className = "no-js";
       [
         ["demo-cw", "flagged"],
-        ["demo-pw", "pinned"],
-        ["demo-lw", "flagged"],
+        ["passage-art", "final"],
       ].forEach(([id, s]) => {
         const fig = document.getElementById(id);
         if (fig) fig.dataset.state = s;
       });
-      document.querySelectorAll(".hero-fallback, .stage-fallback").forEach((img) => img.removeAttribute("aria-hidden"));
+      document.querySelectorAll(".hero-fallback").forEach((img) => img.removeAttribute("aria-hidden"));
     }
 
     // Switching reduced motion on or off mid-visit: the simplest correct
