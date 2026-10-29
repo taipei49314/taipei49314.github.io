@@ -4,8 +4,9 @@
 // and with prefers-reduced-motion, takes screenshots at fixed points of the
 // story, and fails on: page errors, console errors, missing English strings,
 // failed requests or HTTP errors, the wrong layout mode, horizontal page
-// scroll, a blank hero canvas at E, images that never load, and demo buttons
-// or the language toggle that do nothing.
+// scroll, a blank hero canvas at E, images that never load, a demo or the
+// light sweep that never finishes, and demo buttons or the language toggle
+// that do nothing.
 //
 // Usage: node tools/shoot.mjs --width 375 --out shots/375
 //        (serve _site first, e.g. on http://127.0.0.1:8080/)
@@ -142,17 +143,16 @@ async function run(browser, lang, motion) {
     }
 
     const stops = [
-      ["05-checkwash", "#checkwash", "start", 500],
-      ["06-checkwash-demo", "#demo-cw", "center", 4600],
-      ["07-pinwash-demo", "#demo-pw", "center", 9800],
-      ["08-ledgerwash-demo", "#demo-lw", "center", 2600],
-      ["09-family", "#family", "start", 700],
-      ["10-punctum", "#punctum", "start", 900],
-      ["11-punctum-lifted", "#punctum-stage", "center", 3000],
-      ["12-punctum-walk-in", null, null, 3200],
-      ["13-gallery", ".gallery", "start", 1500],
-      ["14-contact", "#contact", "start", 700],
-      ["15-footer", "footer", "start", 500],
+      ["05-works", "#works", "start", 900],
+      ["06-checkwash", "#checkwash", "start", 500],
+      ["07-checkwash-demo", "#demo-cw", "center", 4600],
+      ["08-starry", "#starry", "start", 1200],
+      ["09-gallery", ".gallery:not(.triptych)", "start", 1500],
+      ["10-editorial-doll", "#editorial-doll", "start", 1200],
+      ["11-passage", "#passage", "start", 900],
+      ["12-passage-sweep", "#passage-art", "center", 6400],
+      ["13-contact", "#contact", "start", 700],
+      ["14-footer", "footer", "start", 500],
     ];
     for (const [label, sel, block, ms] of stops) {
       if (sel && !(await scrollIntoView(sel, block))) fail(`missing ${sel}`);
@@ -161,15 +161,21 @@ async function run(browser, lang, motion) {
       await overflow(label);
     }
 
-    const states = await page.evaluate(() => ({
-      cw: document.getElementById("demo-cw").dataset.state,
-      pw: document.getElementById("demo-pw").dataset.state,
-      lw: document.getElementById("demo-lw").dataset.state,
-      stage: document.getElementById("punctum-stage").classList.contains("is-ready"),
-    }));
+    // The sweep is 25 CSS animations: the light band plus three layers of each
+    // of the eight glyphs. All of them must have run to the end.
+    const states = await page.evaluate(() => {
+      const art = document.getElementById("passage-art");
+      const anims = art.getAnimations ? art.getAnimations({ subtree: true }) : [];
+      return {
+        cw: document.getElementById("demo-cw").dataset.state,
+        sweep: art.dataset.state,
+        finished: anims.filter((a) => a.playState === "finished").length,
+        unfinished: anims.filter((a) => a.playState !== "finished").length,
+      };
+    });
     result.notes.push(`demo end states: ${JSON.stringify(states)}`);
-    if (states.cw !== "flagged" || states.pw !== "pinned" || states.lw !== "flagged") fail(`demos did not finish: ${JSON.stringify(states)}`);
-    if (!states.stage) fail("PUNCTUM stage canvas never became ready");
+    if (states.cw !== "flagged") fail(`checkwash demo did not finish: ${JSON.stringify(states)}`);
+    if (states.sweep !== "play" || states.finished < 25 || states.unfinished) fail(`light sweep did not play to the end: ${JSON.stringify(states)}`);
   } else {
     // Static article: scroll through so lazy images load, then one full page.
     const height = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -181,16 +187,18 @@ async function run(browser, lang, motion) {
     await wait(500);
     await shot("01-top");
     await overflow("static page");
+    const sweep = await page.evaluate(() => document.getElementById("passage-art").dataset.state);
+    if (sweep !== "final") fail(`static page shows the light sweep in state "${sweep}", expected "final"`);
     // Readable viewport-sized views of the static article (the full-page
     // image is too tall to inspect at phone widths).
     for (const [label, sel] of [
       ["03-hero-bridge", ".step-bridge"],
-      ["04-checkwash-demo", "#demo-cw"],
-      ["05-pinwash-demo", "#demo-pw"],
-      ["06-ledgerwash-demo", "#demo-lw"],
-      ["07-family", "#family"],
-      ["08-punctum-stage", "#punctum-stage"],
-      ["09-gallery", ".gallery"],
+      ["04-works", "#works"],
+      ["05-checkwash-demo", "#demo-cw"],
+      ["06-starry", "#starry"],
+      ["07-gallery", ".gallery:not(.triptych)"],
+      ["08-editorial-doll", "#editorial-doll"],
+      ["09-passage-art", "#passage-art"],
       ["10-contact", "#contact"],
     ]) {
       if (!(await scrollIntoView(sel, "start"))) fail(`missing ${sel}`);

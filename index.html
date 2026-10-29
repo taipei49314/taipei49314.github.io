@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nelson — 每一筆，都要對得上</title>
-  <meta name="description" content="Nelson（@taipei49314），台北的獨立開發者。寫檢查 AI agent 工作成果的工具：checkwash（程式改動）、pinwash（工作階段）、ledgerwash（工作帳本），也做了一幅能走進去的〈星夜〉：PUNCTUM。" />
+  <meta name="description" content="Nelson（@taipei49314），台北的獨立開發者。checkwash 檢查程式改動有沒有把測試改鬆；〈星夜，只在一個點成立〉是一幅能走進去的畫；Editorial Doll 是數位造型工作室；〈沙下迴廊〉是一段還在做的石室旅程。" />
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#05070D" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://taipei49314.github.io/" />
   <meta property="og:title" content="Nelson — Every stroke has to line up" />
-  <meta property="og:description" content="Independent developer in Taipei. Small offline tools that check what AI coding agents hand in (weakened tests, weakened session gates, task closures without receipts), and a Starry Night you can walk into." />
+  <meta property="og:description" content="Independent developer in Taipei. checkwash flags code changes that weaken tests; a Starry Night that lines up from one point only; Editorial Doll, a digital styling atelier; and The Returning Passage, a journey through a stone chamber, still in progress." />
   <meta property="og:image" content="https://taipei49314.github.io/assets/worlds/starry-night-e.png" />
   <meta property="og:image:width" content="1280" />
   <meta property="og:image:height" content="720" />
@@ -36,15 +36,47 @@
   <script src="app.js" defer onerror="document.documentElement.className = 'no-js'"></script>
 </head>
 <body>
-  <a class="skip-link" href="#tools" data-i18n="nav.skip">跳到工具</a>
+  <a class="skip-link" href="#works" data-i18n="nav.skip">跳到作品</a>
+
+  <!-- Shapes shared by the two Returning Passage illustrations. The glyphs are
+       made up for this page; they are not the ones in the work. -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="pa-wall" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1d1812" />
+        <stop offset="0.7" stop-color="#16120d" />
+        <stop offset="1" stop-color="#100d09" />
+      </linearGradient>
+      <linearGradient id="pa-slab" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2d251b" />
+        <stop offset="1" stop-color="#211b14" />
+      </linearGradient>
+      <linearGradient id="pa-sand" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#5b4a33" />
+        <stop offset="1" stop-color="#2a2218" />
+      </linearGradient>
+      <linearGradient id="pa-light" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffe7b8" stop-opacity="0" />
+        <stop offset="0.5" stop-color="#ffe7b8" stop-opacity="0.26" />
+        <stop offset="1" stop-color="#ffe7b8" stop-opacity="0" />
+      </linearGradient>
+      <g id="gl-1"><path d="M 0 -22 A 22 22 0 1 1 -19 11" /></g>
+      <g id="gl-2"><path d="M -14 -18 L -14 18 M 0 -18 L 0 18 M 14 -18 L 14 18" /></g>
+      <g id="gl-3"><path d="M -20 -20 L -6 -4 L -12 4 L 20 22" /></g>
+      <g id="gl-4"><path d="M -20 -6 L 0 -22 L 20 -6 M -18 14 L 18 14" /></g>
+      <g id="gl-5"><path d="M -22 0 Q 0 -20 22 0 Q 0 20 -22 0 M 0 -5 L 0 5" /></g>
+      <g id="gl-6"><path d="M -20 20 L -20 4 L -4 4 L -4 -12 L 12 -12 L 12 -22" /></g>
+      <g id="gl-7"><path d="M -18 -18 L 18 18 M 18 -18 L 5 -5 M -5 5 L -18 18 M 0 -26 L 0 -22" /></g>
+      <g id="gl-8"><path d="M 10 -20 A 20 20 0 1 0 10 20 M -2 0 L 22 0" /></g>
+    </defs>
+  </svg>
 
   <header class="bar" id="bar" data-surface="night">
     <a class="wordmark" href="#top" aria-label="Nelson">
       <span class="wordmark-dot" aria-hidden="true"></span><span class="wordmark-text">Nelson</span>
     </a>
     <nav class="bar-nav" aria-label="主選單" data-i18n-attr="aria-label:nav.label">
-      <a href="#tools" data-i18n="nav.tools">工具</a>
-      <a href="#punctum">PUNCTUM</a>
+      <a href="#works" data-i18n="nav.works">作品</a>
       <a href="#contact" data-i18n="nav.contact">聯絡</a>
       <button type="button" class="lang-toggle" id="lang-toggle" lang="en" aria-label="Switch to English" data-i18n-attr="aria-label:nav.langLabel;lang:nav.langCode">
         <span data-i18n="nav.lang">EN</span>
@@ -61,7 +93,7 @@
       <div class="scene-sticky">
         <div class="hero-visual">
           <img class="hero-fallback" src="assets/worlds/starry-night-e.png" width="1280" height="720"
-               alt="PUNCTUM 從視點 E 渲染出的〈星夜〉：渦旋的夜空、月亮、絲柏與村莊。"
+               alt="starry-night-3d 從視點 E 渲染出的〈星夜〉：渦旋的夜空、月亮、絲柏與村莊。"
                data-i18n-attr="alt:hero.alt" fetchpriority="high" decoding="async" />
           <canvas class="hero-canvas" id="hero-canvas" role="img"
                   aria-label="許多小片畫面散在不同深度；往下捲動時，鏡頭走向視點 E，從那裡看，它們拼成〈星夜〉。"
@@ -72,9 +104,9 @@
           <div class="step step-intro is-on" data-step="0">
             <p class="eyebrow"><span class="backed" data-i18n="hero.eyebrow">Nelson · 台北的獨立開發者</span></p>
             <h1 class="hero-title" id="hero-title" data-i18n="hero.title">每一筆，<br />都要對得上。</h1>
-            <p class="hero-sub" data-i18n="hero.sub">我寫檢查 AI agent 工作成果的工具，也做了一幅能走進去的〈星夜〉。</p>
+            <p class="hero-sub" data-i18n="hero.sub">我寫檢查程式改動的工具，也做了一幅能走進去的〈星夜〉、一間數位造型工作室，和一段還在做的石室旅程。</p>
             <p class="hero-links">
-              <a class="pill pill-light" href="#tools" data-i18n="hero.ctaTools">看工具 ›</a>
+              <a class="pill pill-light" href="#works" data-i18n="hero.ctaWorks">看作品 ›</a>
               <a class="text-link" href="https://github.com/taipei49314" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             </p>
             <p class="scroll-cue" aria-hidden="true"><span class="scroll-cue-line"></span><span class="backed" data-i18n="hero.cue">往下捲，走到畫家站的位置</span></p>
@@ -89,12 +121,13 @@
           </div>
 
           <div class="step step-bridge" data-step="3">
-            <p class="bridge-title" data-i18n="hero.bridgeTitle">每一個「通過」，<br />也是。</p>
-            <p class="bridge-sub" data-i18n="hero.bridgeSub">測試通過、agent 說做完了、任務結案——每一句都該對得上證據。</p>
+            <p class="bridge-title" data-i18n="hero.bridgeTitle">我做的每一件，<br />也是。</p>
+            <p class="bridge-sub" data-i18n="hero.bridgeSub">四件作品，各自要對上一件事。</p>
             <p class="bridge-map">
-              <a href="#checkwash"><span data-i18n="hero.mapCw">測試通過</span><code>checkwash</code></a>
-              <a href="#pinwash"><span data-i18n="hero.mapPw">agent 說做完了</span><code>pinwash</code></a>
-              <a href="#ledgerwash"><span data-i18n="hero.mapLw">任務結案</span><code>ledgerwash</code></a>
+              <a href="#checkwash"><span data-i18n="hero.mapCw">通過，對上證據</span><b class="mono">checkwash</b></a>
+              <a href="#starry"><span data-i18n="hero.mapSn">筆觸，對上視點</span><b data-i18n="name.snShort">星夜</b></a>
+              <a href="#editorial-doll"><span data-i18n="hero.mapEd">造型，對上穿的人</span><b>Editorial Doll</b></a>
+              <a href="#passage"><span data-i18n="hero.mapPs">刻文，對上光</span><b data-i18n="name.ps">沙下迴廊</b></a>
             </p>
           </div>
         </div>
@@ -102,393 +135,350 @@
     </section>
 
     <!-- ============================================================
-         TOOLS — gesso surface ("gallery lights on")
+         WORKS — the four pieces at a glance (night)
          ============================================================ -->
-    <div class="surface-gesso" id="tools" data-surface="gesso">
+    <section class="chapter surface-night works" id="works" data-surface="night" aria-labelledby="works-title">
+      <div class="wrap">
+        <h2 class="display" id="works-title" data-i18n="works.title">四件作品。</h2>
+        <p class="lead" data-i18n="works.lead">一個工具、一幅畫、一間工作室，和一段還在做的旅程。</p>
 
-      <!-- checkwash -->
-      <section class="chapter tool" id="checkwash" aria-labelledby="cw-title">
-        <div class="wrap">
-          <p class="kicker">
-            <span class="kicker-name">checkwash</span>
-            <span data-i18n="cw.kicker">看一次程式改動</span>
-            <span class="kicker-ver" data-i18n="fam.cwStatus">v0.8.0 · alpha</span>
-          </p>
-          <h2 class="display" id="cw-title" data-i18n="cw.title">綠燈，<br />不代表有在檢查。</h2>
-          <p class="lead" data-i18n="cw.lead">AI agent 有時讓測試「通過」的方法，是把測試改鬆。checkwash 讀你的 git diff，比對測試改動前後的語法樹，把這種改動標出來。它不執行你的程式、分析時不連網、也不用 LLM。</p>
-
-          <figure class="demo demo-cw" id="demo-cw" data-state="flagged">
-            <div class="seg" role="group" aria-label="範例步驟" data-i18n-attr="aria-label:demo.steps">
-              <button type="button" class="seg-btn" data-to="before" aria-pressed="false" data-i18n="cw.btnBefore">改之前</button>
-              <button type="button" class="seg-btn" data-to="after" aria-pressed="false" data-i18n="cw.btnAfter">改之後</button>
-              <button type="button" class="seg-btn" data-to="flagged" aria-pressed="true" data-i18n="cw.btnFlagged">checkwash 看到的</button>
+        <ul class="work-grid">
+          <li class="work-card">
+            <div class="work-art work-art-cw" aria-hidden="true">
+              <span class="wa-line wa-del">-   assert total == 105.3</span>
+              <span class="wa-line wa-add">+   assert total &gt; 0</span>
+              <span class="flag flag-block"><span class="flag-mark">▲</span>ASSERT_WEAKENED</span>
             </div>
+            <div class="work-body">
+              <p class="work-meta"><span data-i18n="works.cwType">工具</span><span class="work-status mono">v0.10.0 · alpha</span></p>
+              <h3 class="work-name mono"><a class="work-link" href="#checkwash">checkwash</a></h3>
+              <p class="work-line" data-i18n="works.cwLine">抓出被改鬆的測試。</p>
+            </div>
+          </li>
+          <li class="work-card">
+            <div class="work-art">
+              <img src="assets/starry/step-aside.webp" width="1280" height="720" alt="" loading="lazy" decoding="async" />
+            </div>
+            <div class="work-body">
+              <p class="work-meta"><span data-i18n="works.snType">互動作品</span><span class="work-status" data-i18n="works.snStatus">線上展示</span></p>
+              <h3 class="work-name"><a class="work-link" href="#starry" data-i18n="name.sn">星夜，只在一個點成立</a></h3>
+              <p class="work-line" data-i18n="works.snLine">約 18 萬筆筆觸，只在一個點拼回梵谷的畫。</p>
+            </div>
+          </li>
+          <li class="work-card">
+            <div class="work-art work-art-ed">
+              <img src="assets/looks/daylight-tailoring.jpg" width="720" height="1080" alt="" loading="lazy" decoding="async" />
+            </div>
+            <div class="work-body">
+              <p class="work-meta"><span data-i18n="works.edType">造型工作室</span><span class="work-status" data-i18n="works.edStatus">作品介紹</span></p>
+              <h3 class="work-name"><a class="work-link" href="#editorial-doll">Editorial Doll</a></h3>
+              <p class="work-line" data-i18n="works.edLine">把穿搭靈感，整理成一份提案。</p>
+            </div>
+          </li>
+          <li class="work-card">
+            <div class="work-art work-art-ps" aria-hidden="true">
+              <svg class="pa-svg" viewBox="0 0 400 225" focusable="false">
+                <rect width="400" height="225" fill="url(#pa-wall)" />
+                <rect x="60" y="38" width="280" height="140" rx="3" fill="url(#pa-slab)" stroke="#4a3c2b" stroke-width="2" />
+                <path d="M 0 200 C 90 192 170 204 250 198 S 350 192 400 197 L 400 225 L 0 225 Z" fill="url(#pa-sand)" />
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g class="pa-glyph" transform="translate(120 108)"><use href="#gl-1" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-1" class="g-cut" /><use href="#gl-1" class="g-halo" /><use href="#gl-1" class="g-lit" /></g>
+                  <g class="pa-glyph" transform="translate(200 108)"><use href="#gl-2" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-2" class="g-cut" /><use href="#gl-2" class="g-halo" /><use href="#gl-2" class="g-lit" /></g>
+                  <g class="pa-glyph is-last" transform="translate(280 108)"><use href="#gl-8" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-8" class="g-cut" /><use href="#gl-8" class="g-halo" /><use href="#gl-8" class="g-lit" /></g>
+                </g>
+              </svg>
+            </div>
+            <div class="work-body">
+              <p class="work-meta"><span data-i18n="works.psType">互動敘事</span><span class="work-status work-status-wip" data-i18n="works.psStatus">製作中</span></p>
+              <h3 class="work-name"><a class="work-link" href="#passage" data-i18n="name.ps">沙下迴廊</a></h3>
+              <p class="work-line" data-i18n="works.psLine">掃過石壁的光，讓刻文一個個醒來。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-            <div class="code-panel">
-              <div class="code-head">
-                <span class="code-file">tests/test_checkout.py</span>
-                <span class="chip-green" title="pytest"><span class="chip-dot" aria-hidden="true"></span>1 passed</span>
-              </div>
+    <!-- ============================================================
+         checkwash (gesso)
+         ============================================================ -->
+    <section class="chapter surface-gesso tool" id="checkwash" data-surface="gesso" aria-labelledby="cw-title">
+      <div class="wrap">
+        <p class="kicker">
+          <span class="kicker-name">checkwash</span>
+          <span data-i18n="cw.kicker">看一次程式改動</span>
+          <span class="kicker-ver mono">v0.10.0 · alpha</span>
+        </p>
+        <h2 class="display" id="cw-title" data-i18n="cw.title">綠燈，<br />不代表有在檢查。</h2>
+        <p class="lead" data-i18n="cw.lead">AI agent 有時讓測試「通過」的方法，是把測試改鬆。checkwash 讀你的 git diff，比對測試改動前後的語法樹，把這種改動標出來。它不執行你的程式、分析時不連網、也不用 LLM。</p>
+
+        <figure class="demo demo-cw" id="demo-cw" data-state="flagged">
+          <div class="seg" role="group" aria-label="範例步驟" data-i18n-attr="aria-label:demo.steps">
+            <button type="button" class="seg-btn" data-to="before" aria-pressed="false" data-i18n="cw.btnBefore">改之前</button>
+            <button type="button" class="seg-btn" data-to="after" aria-pressed="false" data-i18n="cw.btnAfter">改之後</button>
+            <button type="button" class="seg-btn" data-to="flagged" aria-pressed="true" data-i18n="cw.btnFlagged">checkwash 看到的</button>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-head">
+              <span class="code-file">tests/test_checkout.py</span>
+              <span class="chip-green" title="pytest"><span class="chip-dot" aria-hidden="true"></span>1 passed</span>
+            </div>
 <pre class="code"><code><span class="ln ln-ctx">def test_checkout_total():</span>
 <span class="ln ln-ctx">    total = checkout(cart)</span>
 <span class="ln ln-orig">    assert total == 105.3</span><span class="ln ln-del">-   assert total == 105.3</span>
 <span class="ln ln-add"><span class="ln-add-text">+   assert total &gt; 0</span></span></code></pre>
-              <p class="code-flag"><span class="flag flag-block"><span class="flag-mark" aria-hidden="true">▲</span>ASSERT_WEAKENED</span><span class="code-flag-text" data-i18n="cw.flagText">這一行：精確相等被放寬成範圍</span></p>
-            </div>
-
-            <div class="numline" aria-hidden="true">
-              <div class="numline-axis"></div>
-              <div class="numline-band"></div>
-              <span class="numline-tick" style="--x: 0%">0</span>
-              <span class="nl-dot is-wrong nl-up" style="--x: 1.5%; --d: .78s"><span class="nl-val">3</span></span>
-              <span class="nl-dot is-wrong" style="--x: 21%; --d: .5s"><span class="nl-val">42</span></span>
-              <span class="nl-dot is-right" style="--x: 52.65%; --d: 0s"><span class="nl-val">105.3</span></span>
-              <span class="nl-dot is-wrong nl-up" style="--x: 80%; --d: .5s"><span class="nl-val">160</span></span>
-              <span class="nl-dot is-wrong is-far" style="--x: 98.5%; --d: .8s"><span class="nl-val">999.9 →</span></span>
-            </div>
-
-            <figcaption class="demo-caption">
-              <span class="cap cap-before" data-i18n="cw.capBefore">改之前：只有 105.3 會過，其他答案都會讓測試失敗。</span>
-              <span class="cap cap-after" data-i18n="cw.capAfter">改之後：3、42、160、999.9 也都會過。測試照樣是綠的。</span>
-              <span class="cap cap-flagged" data-i18n-html="cw.capFlagged">checkwash 把這一行標成 ASSERT_WEAKENED：精確相等被放寬成一個範圍。<sup><a href="#fn-2" id="ref-2a">2</a></sup></span>
-            </figcaption>
-          </figure>
-
-          <div class="tool-body">
-            <p data-i18n-html="cw.body">它也會標出被刪掉的 assert、新加的 skip、放寬的容差，以及再也不會失敗的 CI 步驟。以 Python 為主，JS/TS 只涵蓋部分寫法；正常的重構也可能被標出。<sup><a href="#fn-3" id="ref-3a">3</a></sup></p>
-            <p class="limits" data-i18n="cw.limits">沒抓到東西時，它說的是「no known tampering pattern detected」：沒有偵測到已知的竄改模式。不是「沒有作弊」。</p>
+            <p class="code-flag"><span class="flag flag-block"><span class="flag-mark" aria-hidden="true">▲</span>ASSERT_WEAKENED</span><span class="code-flag-text" data-i18n="cw.flagText">這一行：精確相等被放寬成範圍</span></p>
           </div>
 
-          <div class="try">
-            <p class="try-label" data-i18n="cw.try">試試看：從 v0.8.0 release 下載 checkwash.pyz，在 repo 根目錄檢查最後一個 commit。</p>
-            <div class="cmd"><code>python checkwash.pyz check HEAD~1..HEAD</code><button type="button" class="cmd-copy" data-copy="python checkwash.pyz check HEAD~1..HEAD" data-i18n="ui.copy">複製</button></div>
+          <div class="numline" aria-hidden="true">
+            <div class="numline-axis"></div>
+            <div class="numline-band"></div>
+            <span class="numline-tick" style="--x: 0%">0</span>
+            <span class="nl-dot is-wrong nl-up" style="--x: 1.5%; --d: .78s"><span class="nl-val">3</span></span>
+            <span class="nl-dot is-wrong" style="--x: 21%; --d: .5s"><span class="nl-val">42</span></span>
+            <span class="nl-dot is-right" style="--x: 52.65%; --d: 0s"><span class="nl-val">105.3</span></span>
+            <span class="nl-dot is-wrong nl-up" style="--x: 80%; --d: .5s"><span class="nl-val">160</span></span>
+            <span class="nl-dot is-wrong is-far" style="--x: 98.5%; --d: .8s"><span class="nl-val">999.9 →</span></span>
           </div>
 
-          <p class="links">
-            <a class="pill pill-ink" href="https://github.com/taipei49314/checkwash" target="_blank" rel="noopener noreferrer" data-i18n="links.github">在 GitHub 上看 ↗</a>
-            <a class="text-link" href="https://github.com/taipei49314/checkwash/releases/tag/v0.8.0" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkRelease">下載 v0.8.0 ↗</a>
-            <a class="text-link" href="https://github.com/taipei49314/checkwash#know-the-limits" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkLimits">已知限制 ↗</a>
-          </p>
-
-          <details class="spec">
-            <summary data-i18n="ui.spec">版本、授權與需求</summary>
-            <dl class="facts">
-              <div><dt data-i18n="facts.version">版本</dt><dd>v0.8.0 · 2026-10-15</dd></div>
-              <div><dt data-i18n="facts.status">狀態</dt><dd data-i18n="cw.status">alpha，還沒到 1.0</dd></div>
-              <div><dt data-i18n="facts.license">授權</dt><dd>Apache-2.0</dd></div>
-              <div><dt data-i18n="facts.needs">需要</dt><dd>Python 3.11+ · Git</dd></div>
-            </dl>
-            <p class="fine spec-note" data-i18n="cw.pipx">也可以用 pipx install checkwash==0.8.0 安裝，再執行 checkwash check HEAD~1..HEAD。</p>
-          </details>
-
-          <aside class="builders" aria-labelledby="builders-title">
-            <h3 id="builders-title" data-i18n="cw.buildersTitle">在做 PR 審查或 CI 工具？</h3>
-            <p data-i18n="cw.buildersBody">checkwash 的設計，就是讓你嵌進自己的工具裡。跑一次、讀 JSON；也有 SARIF 輸出和 GitHub Action。要真的擋下合併，得把 checkwash 設成必要的狀態檢查。1.0 之前格式還可能調整，請在 CI 裡釘住確切版本，也歡迎告訴我你需要什麼。</p>
-            <div class="cmd"><code>checkwash check BASE...HEAD --format json</code><button type="button" class="cmd-copy" data-copy="checkwash check BASE...HEAD --format json" data-i18n="ui.copy">複製</button></div>
-            <details class="spec spec-inner">
-              <summary data-i18n="cw.integrate">結束代碼與文件</summary>
-              <table class="exit-table">
-                <caption data-i18n="cw.exitCaption">結束代碼（--format json）</caption>
-                <tbody>
-                  <tr><th scope="row">0</th><td data-i18n="cw.exit0">通過：沒有需要擋下的發現</td></tr>
-                  <tr><th scope="row">1</th><td data-i18n="cw.exit1">擋下：有達到門檻、又沒被豁免的發現（門檻預設 high）</td></tr>
-                  <tr><th scope="row">2</th><td data-i18n="cw.exit2">錯誤：無法分析，不代表沒有發現</td></tr>
-                </tbody>
-              </table>
-              <p class="links links-small">
-                <a class="text-link" href="https://github.com/taipei49314/checkwash/blob/main/docs/embedding.md" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkEmbed">嵌入指南 ↗</a>
-                <a class="text-link" href="https://github.com/taipei49314/checkwash/blob/main/docs/findings.schema.json" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkSchema">findings JSON schema ↗</a>
-                <a class="text-link" href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkStability">相容性說明 ↗</a>
-              </p>
-              <p class="fine" data-i18n="cw.mainNote">嵌入指南和 findings schema 只在 main 分支上，還不在 v0.8.0 的 tag 裡。</p>
-            </details>
-          </aside>
-        </div>
-      </section>
-
-      <!-- pinwash -->
-      <section class="chapter tool" id="pinwash" aria-labelledby="pw-title">
-        <div class="wrap">
-          <p class="kicker">
-            <span class="kicker-name">pinwash</span>
-            <span data-i18n="pw.kicker">看一次 agent 工作階段</span>
-            <span class="kicker-ver" data-i18n="fam.pwStatus">v0.1.1 · Alpha</span>
-          </p>
-          <h2 class="display" id="pw-title" data-i18n="pw.title">先釘住起點。</h2>
-          <p class="lead" data-i18n="pw.lead">agent 開工前，pinwash 先記下當下的 commit，叫做 BASE。收工後，已提交和沒提交的改動，都拿來跟 BASE 比。</p>
-
-          <figure class="demo demo-pw" id="demo-pw" data-state="pinned">
-            <div class="seg" role="group" aria-label="範例步驟" data-i18n-attr="aria-label:demo.steps">
-              <button type="button" class="seg-btn" data-to="events" aria-pressed="false" data-i18n="pw.btnEvents">發生了什麼</button>
-              <button type="button" class="seg-btn" data-to="plain" aria-pressed="false" data-i18n="pw.btnPlain">只比最後一步</button>
-              <button type="button" class="seg-btn" data-to="pinned" aria-pressed="true" data-i18n="pw.btnPinned">從 BASE 起算</button>
-            </div>
-
-            <div class="timeline" aria-hidden="true">
-              <svg class="timeline-svg" viewBox="0 30 400 112" focusable="false">
-                <line class="tl-rail" x1="30" y1="100" x2="345" y2="100" />
-                <path class="tl-arc tl-arc-bw" pathLength="1" d="M 30 100 Q 187.5 -2 345 100" />
-                <path class="tl-arc tl-arc-bh" pathLength="1" d="M 30 100 Q 135 30 240 100" />
-                <path class="tl-arc tl-arc-hw" pathLength="1" d="M 240 100 Q 292.5 56 345 100" />
-                <path class="tl-pin" d="M 30 64 L 30 90 M 22 64 L 38 64" />
-                <circle class="tl-node tl-node-base" cx="30" cy="100" r="7" />
-                <circle class="tl-node tl-node-change" cx="135" cy="100" r="6" />
-                <circle class="tl-node" cx="240" cy="100" r="7" />
-                <circle class="tl-node tl-node-change" cx="345" cy="100" r="7" />
-              </svg>
-              <span class="tl-label" style="--x: 7.5%">BASE</span>
-              <span class="tl-label tl-label-minor" style="--x: 33.75%">commit</span>
-              <span class="tl-label" style="--x: 60%">HEAD</span>
-              <span class="tl-label" style="--x: 86.25%">WORKTREE</span>
-            </div>
-
-            <ul class="tl-events">
-              <li>
-                <span class="tl-ev-where">commit</span>
-                <span class="tl-ev-what" data-i18n="pw.ev1">新增一筆豁免（.pinwash/allow.toml）</span>
-                <span class="tl-ev-status">
-                  <span class="flag flag-muted tl-st-plain" data-i18n="pw.missed">只比最後一步：沒被標出</span>
-                  <span class="flag flag-hold tl-st-pinned"><span class="flag-mark" aria-hidden="true">▲</span>EXEMPTION_ADDED</span>
-                </span>
-              </li>
-              <li>
-                <span class="tl-ev-where">WORKTREE</span>
-                <span class="tl-ev-what" data-i18n="pw.ev2">沒提交：把負責把關的 Stop hook 改成 exit&nbsp;0</span>
-                <span class="tl-ev-status">
-                  <span class="flag flag-muted tl-st-plain" data-i18n="pw.missed">只比最後一步：沒被標出</span>
-                  <span class="flag flag-block tl-st-pinned"><span class="flag-mark" aria-hidden="true">▲</span>GATE_STUBBED</span>
-                </span>
-              </li>
-            </ul>
-
-            <figcaption class="demo-caption">
-              <span class="cap cap-events" data-i18n="pw.capEvents">agent 先提交一筆豁免，再在沒提交的工作區裡，把負責把關的 Stop hook 改成 exit&nbsp;0。</span>
-              <span class="cap cap-plain" data-i18n="pw.capPlain">只比 HEAD 和工作區：豁免規則從 HEAD 讀，agent 剛加的那筆會被採信，hook 的改動就這樣過關。只看最後一個 commit，又看不到沒提交的改動。</span>
-              <span class="cap cap-pinned" data-i18n-html="pw.capPinned">pinwash 做三組比對：BASE..HEAD、BASE..WORKTREE、HEAD..WORKTREE。從 BASE 起算的兩組，只從釘住的 BASE 讀豁免規則，所以被改成 exit&nbsp;0 的 hook 會在 BASE..WORKTREE 被標出來；新加的豁免也會列出來，要等人看過才算數。<sup><a href="#fn-2" id="ref-2b">2</a></sup></span>
-            </figcaption>
-          </figure>
-
-          <div class="tool-body">
-            <p data-i18n-html="pw.body">它看的是決定「做完了」能不能信的那些東西：CI 工作流程、agent 的 hooks、豁免規則、必要的狀態檢查。pinwash 會給出判定，但不會替你擋下任何改動。<sup><a href="#fn-4" id="ref-4a">4</a></sup></p>
-          </div>
-
-          <div class="try">
-            <p class="try-label" data-i18n="pw.try">試試看：裝在 agent 碰不到的地方。開工前執行 pinwash session start；agent 和它啟動的程式都停下來後，再執行 pinwash session review。</p>
-            <div class="cmd"><code>pipx install pinwash==0.1.1</code><button type="button" class="cmd-copy" data-copy="pipx install pinwash==0.1.1" data-i18n="ui.copy">複製</button></div>
-            <div class="cmd"><code>pinwash session start</code><button type="button" class="cmd-copy" data-copy="pinwash session start" data-i18n="ui.copy">複製</button></div>
-            <div class="cmd"><code>pinwash session review</code><button type="button" class="cmd-copy" data-copy="pinwash session review" data-i18n="ui.copy">複製</button></div>
-          </div>
-
-          <p class="links">
-            <a class="pill pill-ink" href="https://github.com/taipei49314/pinwash" target="_blank" rel="noopener noreferrer" data-i18n="links.github">在 GitHub 上看 ↗</a>
-            <a class="text-link" href="https://github.com/taipei49314/pinwash/blob/main/docs/QUICKSTART.md" target="_blank" rel="noopener noreferrer" data-i18n="pw.linkQuickstart">快速上手 ↗</a>
-            <a class="text-link" href="https://pypi.org/project/pinwash/0.1.1/" target="_blank" rel="noopener noreferrer">PyPI ↗</a>
-          </p>
-
-          <details class="spec">
-            <summary data-i18n="ui.spec">版本、授權與需求</summary>
-            <dl class="facts">
-              <div><dt data-i18n="facts.version">版本</dt><dd>v0.1.1 · 2026-10-19</dd></div>
-              <div><dt data-i18n="facts.status">狀態</dt><dd data-i18n="pw.status">Alpha（pre-release），目前只在 Linux 上驗收過</dd></div>
-              <div><dt data-i18n="facts.license">授權</dt><dd>MIT</dd></div>
-              <div><dt data-i18n="facts.needs">需要</dt><dd>Python 3.11+ · Git</dd></div>
-            </dl>
-          </details>
-        </div>
-      </section>
-
-      <!-- ledgerwash -->
-      <section class="chapter tool" id="ledgerwash" aria-labelledby="lw-title">
-        <div class="wrap">
-          <p class="kicker">
-            <span class="kicker-name">ledgerwash</span>
-            <span data-i18n="lw.kicker">看工作帳本</span>
-            <span class="kicker-ver" data-i18n="fam.lwStatus">v0.5.0 · 1.0 之前</span>
-          </p>
-          <h2 class="display" id="lw-title" data-i18n="lw.title">說做完了？<br />收據呢？</h2>
-          <p class="lead" data-i18n="lw.lead">agent 交接時說任務做完了。ledgerwash 在釘住的 commit 上，唯讀檢查工作帳本和交接收據，標出證據撐不起來的結案。</p>
-
-          <figure class="demo demo-lw" id="demo-lw" data-state="flagged">
-            <div class="receipt">
-              <p class="receipt-head"><span>governance/tasks/</span><span data-i18n="lw.earliest">帳本最早的操作收據：2026-04-01</span></p>
-              <div class="receipt-row">
-                <p class="receipt-id">T-101 <span class="receipt-state">DONE</span></p>
-                <p class="receipt-cells"><span data-i18n="lw.r1closed">結案 2026-10-17</span><span data-i18n="lw.r1receipts">操作收據 0 張</span></p>
-                <p class="flag flag-block"><span class="flag-mark" aria-hidden="true">▲</span>NO_OPERATION_HISTORY</p>
-                <p class="receipt-why" data-i18n="lw.r1why">標成完成，卻沒有任何操作收據。</p>
-              </div>
-              <div class="receipt-row">
-                <p class="receipt-id">T-102 <span class="receipt-state">DONE</span></p>
-                <p class="receipt-cells"><span data-i18n="lw.r2closed">結案 2026-03-02</span><span data-i18n="lw.r2receipts">操作收據 0 張</span><span data-i18n="lw.r2born">任務檔建立於 2026-10-12</span></p>
-                <p class="flag flag-block"><span class="flag-mark" aria-hidden="true">▲</span>DONE_TIME_BACKDATED</p>
-                <p class="receipt-why" data-i18n="lw.r2why">結案日寫得比收據制度還早，但任務檔自己的 git 歷史說，它是之後才建立的。</p>
-              </div>
-            </div>
-            <figcaption class="demo-caption">
-              <span class="cap cap-flagged" data-i18n-html="lw.cap">兩筆都標成 DONE，都沒有收據；ledgerwash 依結案時間分成兩種情況。任務編號與日期是示意。<sup><a href="#fn-2" id="ref-2c">2</a></sup></span>
-            </figcaption>
-            <button type="button" class="replay" data-i18n="ui.replay">重播</button>
-          </figure>
-
-          <div class="tool-body">
-            <p data-i18n-html="lw.body">「checkwash 守 diff，ledgerwash 守帳本。」它目前只讀一種帳本格式（ec-ledger adapter）；沒有帳本的 repo 會被列為「沒涵蓋到」，不是「乾淨」。<sup><a href="#fn-5" id="ref-5a">5</a></sup></p>
-          </div>
-
-          <div class="try">
-            <p class="try-label" data-i18n="lw.try">試試看：裝好後，先記下要檢查的 commit SHA，再釘在那個 commit 上掃描。</p>
-            <div class="cmd"><code>python -m pip install ledgerwash==0.5.0</code><button type="button" class="cmd-copy" data-copy="python -m pip install ledgerwash==0.5.0" data-i18n="ui.copy">複製</button></div>
-            <div class="cmd"><code>ledgerwash scan &lt;repo&gt; --at &lt;pinned-sha&gt;</code><button type="button" class="cmd-copy" data-copy="ledgerwash scan <repo> --at <pinned-sha>" data-i18n="ui.copy">複製</button></div>
-          </div>
-
-          <p class="links">
-            <a class="pill pill-ink" href="https://github.com/taipei49314/ledgerwash" target="_blank" rel="noopener noreferrer" data-i18n="links.github">在 GitHub 上看 ↗</a>
-            <a class="text-link" href="https://pypi.org/project/ledgerwash/0.5.0/" target="_blank" rel="noopener noreferrer">PyPI ↗</a>
-          </p>
-
-          <details class="spec">
-            <summary data-i18n="ui.spec">版本、授權與需求</summary>
-            <dl class="facts">
-              <div><dt data-i18n="facts.version">版本</dt><dd>v0.5.0 · spec 5 · 2026-10-17</dd></div>
-              <div><dt data-i18n="facts.status">狀態</dt><dd data-i18n="lw.status">還沒到 1.0</dd></div>
-              <div><dt data-i18n="facts.license">授權</dt><dd>Apache-2.0</dd></div>
-              <div><dt data-i18n="facts.needs">需要</dt><dd>Python 3.11+ · Git</dd></div>
-            </dl>
-            <p class="fine spec-note" data-i18n="lw.source">從原始碼目錄執行時，README 用的是 uv：uv run ledgerwash scan &lt;repo&gt; --at &lt;pinned-sha&gt;。</p>
-          </details>
-        </div>
-      </section>
-
-      <!-- family -->
-      <section class="chapter family" id="family" aria-labelledby="family-title">
-        <div class="wrap">
-          <h2 class="display" id="family-title" data-i18n="fam.title">三個工具，<br />各自獨立。</h2>
-          <p class="lead" data-i18n="fam.lead">它們不是一條流水線，各看一個地方。共同的規矩只有幾條：</p>
-          <ul class="principles">
-            <li data-i18n="fam.p1">在你的電腦上跑。分析時不連網，也不把程式碼送去任何地方。</li>
-            <li data-i18n="fam.p2">同樣的輸入，同樣的答案。不靠語言模型猜。</li>
-            <li data-i18n="fam.p3">不執行被檢查的程式。</li>
-            <li data-i18n="fam.p4">不說得比做到的多。通過不等於正確；1.0 之前，就寫 1.0 之前。</li>
-          </ul>
-          <div class="table-scroll">
-            <table class="family-table">
-              <thead>
-                <tr>
-                  <th scope="col" data-i18n="fam.colTool">工具</th>
-                  <th scope="col" data-i18n="fam.colReads">看什麼</th>
-                  <th scope="col" data-i18n="fam.colFlags">標出什麼</th>
-                  <th scope="col" data-i18n="fam.colStatus">狀態</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row"><a href="#checkwash">checkwash</a></th>
-                  <td data-label="看什麼" data-i18n-attr="data-label:fam.colReads" data-i18n="fam.cwReads">一次程式改動的 git diff</td>
-                  <td data-label="標出什麼" data-i18n-attr="data-label:fam.colFlags" data-i18n="fam.cwFlags">被弱化的測試與 CI 檢查</td>
-                  <td data-label="狀態" data-i18n-attr="data-label:fam.colStatus" data-i18n="fam.cwStatus">v0.8.0 · alpha</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#pinwash">pinwash</a></th>
-                  <td data-label="看什麼" data-i18n-attr="data-label:fam.colReads" data-i18n="fam.pwReads">一次 agent 工作階段（BASE、HEAD、工作區）</td>
-                  <td data-label="標出什麼" data-i18n-attr="data-label:fam.colFlags" data-i18n="fam.pwFlags">被弱化的把關機制（CI、hooks、必要檢查）、新加的豁免</td>
-                  <td data-label="狀態" data-i18n-attr="data-label:fam.colStatus" data-i18n="fam.pwStatus">v0.1.1 · Alpha</td>
-                </tr>
-                <tr>
-                  <th scope="row"><a href="#ledgerwash">ledgerwash</a></th>
-                  <td data-label="看什麼" data-i18n-attr="data-label:fam.colReads" data-i18n="fam.lwReads">工作帳本與交接收據</td>
-                  <td data-label="標出什麼" data-i18n-attr="data-label:fam.colFlags" data-i18n="fam.lwFlags">證據撐不起來的結案</td>
-                  <td data-label="狀態" data-i18n-attr="data-label:fam.colStatus" data-i18n="fam.lwStatus">v0.5.0 · 1.0 之前</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="fine family-asof" data-i18n="fam.asOf">版本與狀態截至 2026-10-19。</p>
-        </div>
-      </section>
-    </div>
-
-    <!-- ============================================================
-         PUNCTUM — night surface again ("lights off")
-         ============================================================ -->
-    <section class="chapter surface-night punctum" id="punctum" data-surface="night" aria-labelledby="pn-title">
-      <div class="wrap">
-        <p class="kicker"><span class="kicker-name">PUNCTUM</span><span>starry-night-3d</span></p>
-        <h2 class="display" id="pn-title" data-i18n="pn.title">約 18.1 萬筆，<br />一個位置。</h2>
-        <p class="lead" data-i18n="pn.lead">梵谷的三十幅畫，做成三十個可以走進去的立體世界。每一筆都放在從視點 E 出發的射線上，越遠畫得越大，所以從 E 看過去大小剛好，拼回原畫；一離開 E，畫就打開成一個世界。</p>
-
-        <figure class="stage-figure">
-          <div class="stage" id="punctum-stage">
-            <img class="stage-fallback" src="assets/worlds/road-cypress-e.png" width="1280" height="720" loading="lazy" decoding="async"
-                 alt="PUNCTUM 從視點 E 渲染出的〈有絲柏與星辰的道路〉。" data-i18n-attr="alt:pn.stageAlt" />
-            <canvas class="stage-canvas" id="punctum-canvas" role="img"
-                    aria-label="〈有絲柏與星辰的道路〉切成許多小片，散在不同深度。改變鏡頭位置，可以看到離開 E 時，畫在空間中打開。"
-                    data-i18n-attr="aria-label:pn.canvasLabel"></canvas>
-          </div>
-          <div class="stage-controls">
-            <div class="seg" role="group" aria-label="預設視角" data-i18n-attr="aria-label:pn.viewLabel">
-              <button type="button" class="seg-btn" data-pose="0" aria-pressed="true" data-i18n="pn.poseE">從 E 看</button>
-              <button type="button" class="seg-btn" data-pose="50" aria-pressed="false" data-i18n="pn.poseLift">抬起鏡頭</button>
-              <button type="button" class="seg-btn" data-pose="100" aria-pressed="false" data-i18n="pn.poseWalk">走進去</button>
-            </div>
-            <label class="range">
-              <span class="range-label" data-i18n="pn.slider">鏡頭位置</span>
-              <input type="range" id="punctum-range" min="0" max="100" step="1" value="0" aria-valuetext="從 E 看" />
-            </label>
-          </div>
-          <figcaption class="stage-caption" data-i18n-html="pn.stageCaption">用 PUNCTUM 的 CI 截圖切成許多小片做的 2D 示意；真正的作品用 three.js 即時渲染。<sup><a href="#fn-1" id="ref-1b">1</a></sup></figcaption>
+          <figcaption class="demo-caption">
+            <span class="cap cap-before" data-i18n="cw.capBefore">改之前：只有 105.3 會過，其他答案都會讓測試失敗。</span>
+            <span class="cap cap-after" data-i18n="cw.capAfter">改之後：3、42、160、999.9 也都會過。測試照樣是綠的。</span>
+            <span class="cap cap-flagged" data-i18n-html="cw.capFlagged">checkwash 把這一行標成 ASSERT_WEAKENED：精確相等被放寬成一個範圍。<sup><a href="#fn-2" id="ref-2a">2</a></sup></span>
+          </figcaption>
         </figure>
 
-        <div class="compare">
-          <figure class="shot">
-            <div class="frame" style="--ar: 556 / 716">
-              <img src="assets/worlds/road-cypress-e.png" width="1280" height="720" loading="lazy" decoding="async"
-                   alt="從視點 E 看〈有絲柏與星辰的道路〉：筆觸拼成完整的畫。" data-i18n-attr="alt:pn.cmpEAlt" />
-            </div>
-            <figcaption><strong data-i18n="pn.cmpE">從 E 看</strong><span data-i18n="pn.cmpECap">XXIV〈有絲柏與星辰的道路〉，57,450 筆</span></figcaption>
-          </figure>
-          <figure class="shot">
-            <div class="frame" style="--ar: 16 / 9">
-              <img src="assets/worlds/road-cypress-off-e.png" width="1280" height="720" loading="lazy" decoding="async"
-                   alt="同一幅畫，鏡頭離開視點 E：天空、絲柏和地面的筆觸散開，露出畫後面的空間。" data-i18n-attr="alt:pn.cmpOffAlt" />
-            </div>
-            <figcaption><strong data-i18n="pn.cmpOff">離開 E</strong><span data-i18n="pn.cmpOffCap">同一幅畫，從旁邊看</span></figcaption>
-          </figure>
+        <div class="tool-body">
+          <p data-i18n-html="cw.body">它也會標出被刪掉的 assert、新加的 skip、放寬的容差，以及再也不會失敗的 CI 步驟。以 Python 為主，JS/TS 只涵蓋部分寫法；正常的重構也可能被標出。<sup><a href="#fn-3" id="ref-3a">3</a></sup></p>
+          <p class="limits" data-i18n="cw.limits">沒抓到東西時，它說的是「no known tampering pattern detected」：沒有偵測到已知的竄改模式。不是「沒有作弊」。</p>
         </div>
 
-        <h3 class="gallery-title" data-i18n="pn.galleryTitle">三十個世界裡的六個</h3>
-        <div class="gallery">
-          <figure class="shot" style="--ar: 1.264">
-            <div class="frame"><img src="assets/worlds/starry-night-rhone.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈隆河上的星夜〉" data-i18n-attr="alt:pn.g1" /></div>
-            <figcaption><strong>XVIII</strong><span data-i18n="pn.g1">〈隆河上的星夜〉</span><span class="count">109,220</span></figcaption>
-          </figure>
-          <figure class="shot" style="--ar: 0.772">
-            <div class="frame"><img src="assets/worlds/sunflowers.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈向日葵〉" data-i18n-attr="alt:pn.g2" /></div>
-            <figcaption><strong>XIII</strong><span data-i18n="pn.g2">〈向日葵〉</span><span class="count">68,640</span></figcaption>
-          </figure>
-          <figure class="shot" style="--ar: 2">
-            <div class="frame"><img src="assets/worlds/wheatfield-crows.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈麥田群鴉〉" data-i18n-attr="alt:pn.g3" /></div>
-            <figcaption><strong>XXX</strong><span data-i18n="pn.g3">〈麥田群鴉〉</span><span class="count">66,536</span></figcaption>
-          </figure>
-          <figure class="shot" style="--ar: 0.794">
-            <div class="frame"><img src="assets/worlds/cafe-terrace.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈夜間露天咖啡座〉" data-i18n-attr="alt:pn.g4" /></div>
-            <figcaption><strong>XVI</strong><span data-i18n="pn.g4">〈夜間露天咖啡座〉</span><span class="count">117,290</span></figcaption>
-          </figure>
+        <div class="try">
+          <p class="try-label" data-i18n="cw.try">試試看：從 v0.10.0 release 下載 checkwash.pyz，先跑內建的離線範例，再到你的 repo 根目錄檢查最後一個 commit。</p>
+          <div class="cmd"><code>python checkwash.pyz demo</code><button type="button" class="cmd-copy" data-copy="python checkwash.pyz demo" data-i18n="ui.copy">複製</button></div>
+          <div class="cmd"><code>python checkwash.pyz check HEAD~1..HEAD</code><button type="button" class="cmd-copy" data-copy="python checkwash.pyz check HEAD~1..HEAD" data-i18n="ui.copy">複製</button></div>
+        </div>
+
+        <p class="links">
+          <a class="pill pill-ink" href="https://github.com/taipei49314/checkwash" target="_blank" rel="noopener noreferrer" data-i18n="links.github">在 GitHub 上看 ↗</a>
+          <a class="text-link" href="https://github.com/taipei49314/checkwash/releases/tag/v0.10.0" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkRelease">下載 v0.10.0 ↗</a>
+          <a class="text-link" href="https://github.com/taipei49314/checkwash#know-the-limits" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkLimits">已知限制 ↗</a>
+        </p>
+
+        <details class="spec">
+          <summary data-i18n="ui.spec">版本、授權與需求</summary>
+          <dl class="facts">
+            <div><dt data-i18n="facts.version">版本</dt><dd>v0.10.0 · 2026-10-28</dd></div>
+            <div><dt data-i18n="facts.status">狀態</dt><dd data-i18n="cw.status">alpha，還沒到 1.0</dd></div>
+            <div><dt data-i18n="facts.license">授權</dt><dd>Apache-2.0</dd></div>
+            <div><dt data-i18n="facts.needs">需要</dt><dd>Python 3.11+ · Git</dd></div>
+          </dl>
+          <p class="fine spec-note" data-i18n="cw.pipx">也可以用 pipx install checkwash==0.10.0 安裝，再執行 checkwash check HEAD~1..HEAD。</p>
+        </details>
+
+        <aside class="builders" aria-labelledby="builders-title">
+          <h3 id="builders-title" data-i18n="cw.buildersTitle">在做 PR 審查或 CI 工具？</h3>
+          <p data-i18n="cw.buildersBody">checkwash 的設計，就是讓你嵌進自己的工具裡。跑一次、讀 JSON；也有 SARIF 輸出和 GitHub Action。要真的擋下合併，得把 checkwash 設成必要的狀態檢查。1.0 之前格式還可能調整，請在 CI 裡釘住確切版本，也歡迎告訴我你需要什麼。</p>
+          <div class="cmd"><code>checkwash check BASE...HEAD --format json</code><button type="button" class="cmd-copy" data-copy="checkwash check BASE...HEAD --format json" data-i18n="ui.copy">複製</button></div>
+          <details class="spec spec-inner">
+            <summary data-i18n="cw.integrate">結束代碼與文件</summary>
+            <table class="exit-table">
+              <caption data-i18n="cw.exitCaption">結束代碼（--format json）</caption>
+              <tbody>
+                <tr><th scope="row">0</th><td data-i18n="cw.exit0">通過：沒有需要擋下的發現</td></tr>
+                <tr><th scope="row">1</th><td data-i18n="cw.exit1">擋下：有達到門檻、又沒被豁免的發現（門檻預設 high）</td></tr>
+                <tr><th scope="row">2</th><td data-i18n="cw.exit2">錯誤：無法分析，不代表沒有發現</td></tr>
+              </tbody>
+            </table>
+            <p class="links links-small">
+              <a class="text-link" href="https://github.com/taipei49314/checkwash/blob/main/docs/embedding.md" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkEmbed">嵌入指南 ↗</a>
+              <a class="text-link" href="https://github.com/taipei49314/checkwash/blob/main/docs/findings.schema.json" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkSchema">findings JSON schema ↗</a>
+              <a class="text-link" href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md" target="_blank" rel="noopener noreferrer" data-i18n="cw.linkStability">相容性說明 ↗</a>
+            </p>
+          </details>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         The Starry Night from One Viewpoint (night)
+         ============================================================ -->
+    <section class="chapter surface-night starry" id="starry" data-surface="night" aria-labelledby="sn-title">
+      <div class="wrap">
+        <p class="kicker">
+          <span class="kicker-name">starry-night-3d</span>
+          <span data-i18n="sn.kicker">一幅能走進去的畫</span>
+          <span class="kicker-ver" data-i18n="works.snStatus">線上展示</span>
+        </p>
+        <h2 class="display" id="sn-title" data-i18n="sn.title">約 18 萬筆，<br />一個位置。</h2>
+        <p class="lead" data-i18n="sn.lead">約 18 萬筆筆觸散在最深 250 公里的 3D 空間裡。只有站在畫家眼睛的那一點 E，它們才拼回梵谷的〈星夜〉；一離開那個點，畫就散開成立體的世界。</p>
+
+        <div class="gallery triptych">
           <figure class="shot" style="--ar: 1.25">
-            <div class="frame"><img src="assets/worlds/wheat-field-cypresses.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈有絲柏的麥田〉" data-i18n-attr="alt:pn.g5" /></div>
-            <figcaption><strong>XXIII</strong><span data-i18n="pn.g5">〈有絲柏的麥田〉</span><span class="count">129,863</span></figcaption>
+            <div class="frame"><img src="assets/starry/at-eye.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="從畫家的視點 E 看：筆觸拼成完整的〈星夜〉。" data-i18n-attr="alt:sn.eyeAlt" /></div>
+            <figcaption><strong data-i18n="sn.eye">從 E 看</strong><span data-i18n="sn.eyeCap">筆觸拼成〈星夜〉</span></figcaption>
           </figure>
           <figure class="shot" style="--ar: 1.778">
-            <div class="frame"><img src="assets/worlds/bedroom-off-e.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈在亞爾的臥室〉，鏡頭離開視點 E" data-i18n-attr="alt:pn.g6alt" /></div>
-            <figcaption><strong>XIX</strong><span data-i18n="pn.g6">〈在亞爾的臥室〉，離開 E</span><span class="count">92,629</span></figcaption>
+            <div class="frame"><img src="assets/starry/step-aside.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="離開 E 幾十公尺：絲柏移到天空前面，遮住其中一個漩渦，村莊也跟著錯開。" data-i18n-attr="alt:sn.asideAlt" /></div>
+            <figcaption><strong data-i18n="sn.aside">往旁邊走</strong><span data-i18n="sn.asideCap">絲柏滑到天空前面，遮住一個漩渦</span></figcaption>
+          </figure>
+          <figure class="shot" style="--ar: 1.778">
+            <div class="frame"><img src="assets/starry/twin-funnels.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="飛進天空：漩渦是由筆觸組成、朝向眼睛的漏斗。" data-i18n-attr="alt:sn.skyAlt" /></div>
+            <figcaption><strong data-i18n="sn.sky">在天空裡</strong><span data-i18n="sn.skyCap">漩渦其實是筆觸組成的漏斗</span></figcaption>
           </figure>
         </div>
-        <p class="fine gallery-note" data-i18n="pn.galleryNote">數字是每個世界的筆觸數。畫面與數字取自 starry-night-3d 的 CI 自動截圖與驗證報告（main 015d0fb，2026-10-19）。</p>
+        <p class="fine shots-note" data-i18n="sn.shotsNote">三張圖由 starry-night-3d 的程式在 NVIDIA 筆電 GPU 上、以無頭 Chrome 渲染，介面隱藏（main 278293e）。</p>
 
-        <p class="links links-center">
-          <a class="pill pill-gold" href="https://taipei49314.github.io/starry-night-3d/" target="_blank" rel="noopener noreferrer" data-i18n="pn.open">開啟線上展示 ↗</a>
-          <a class="text-link" href="https://taipei49314.github.io/starry-night-3d/single.html" target="_blank" rel="noopener noreferrer" data-i18n="pn.single">單檔版 ↗</a>
+        <div class="tool-body">
+          <p data-i18n="sn.body">每一筆只有一個自由值：它離 E 多遠。越遠畫得越大，所以從 E 看，每一筆都剛好蓋在原畫裡的位置。上色的順序變成深度：最後畫上的絲柏和村莊最近，底色在 250 公里外。開場是一段 96 秒、10 個鏡頭的運鏡：畫自己畫出來，畫框滑開，鏡頭爬上絲柏、穿過金星、掉進天空的漩渦，再飛回 E。</p>
+        </div>
+
+        <p class="links">
+          <a class="pill pill-gold" href="https://taipei49314.github.io/starry-night-3d/" target="_blank" rel="noopener noreferrer" data-i18n="sn.open">開啟作品 ↗</a>
+          <a class="text-link" href="https://taipei49314.github.io/starry-night-3d/single.html" target="_blank" rel="noopener noreferrer" data-i18n="sn.single">單檔版 ↗</a>
           <a class="text-link" href="https://github.com/taipei49314/starry-night-3d" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         </p>
-        <p class="fine fine-center" data-i18n="pn.facts">TypeScript · three.js r186（WebGL 2）· MIT。沒有貼圖、模型或音檔，聲音也是即時合成。需要支援 WebGL 2 的瀏覽器。</p>
+        <p class="fine sn-facts" data-i18n="sn.facts">拖曳看四周，W A S D 飛行，空白鍵回到 E。TypeScript · three.js（WebGL 2）· MIT。沒有貼圖、模型或音檔，全部由程式產生。需要支援 WebGL 2 的瀏覽器。</p>
+
+        <h3 class="gallery-title" data-i18n="sn.galleryTitle">同一套引擎，還畫了另外 29 幅</h3>
+        <p class="gallery-lead" data-i18n-html="sn.galleryLead">從作品上方的選單或網址進入：<a class="text-link" href="https://taipei49314.github.io/starry-night-3d/?mode=witness" target="_blank" rel="noopener noreferrer">witness</a> 走過梵谷一生的五個時期，<a class="text-link" href="https://taipei49314.github.io/starry-night-3d/?mode=odyssey" target="_blank" rel="noopener noreferrer">odyssey</a> 用 900 秒一口氣飛過全部 30 幅，<a class="text-link" href="https://taipei49314.github.io/starry-night-3d/?mode=atlas" target="_blank" rel="noopener noreferrer">atlas</a> 是 30 個世界的地圖。</p>
+        <div class="gallery">
+          <figure class="shot" style="--ar: 1.264">
+            <div class="frame"><img src="assets/worlds/starry-night-rhone.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈隆河上的星夜〉" data-i18n-attr="alt:sn.g1" /></div>
+            <figcaption><strong>XVIII</strong><span data-i18n="sn.g1">〈隆河上的星夜〉</span><span class="count">109,220</span></figcaption>
+          </figure>
+          <figure class="shot" style="--ar: 0.772">
+            <div class="frame"><img src="assets/worlds/sunflowers.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈向日葵〉" data-i18n-attr="alt:sn.g2" /></div>
+            <figcaption><strong>XIII</strong><span data-i18n="sn.g2">〈向日葵〉</span><span class="count">68,640</span></figcaption>
+          </figure>
+          <figure class="shot" style="--ar: 2">
+            <div class="frame"><img src="assets/worlds/wheatfield-crows.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈麥田群鴉〉" data-i18n-attr="alt:sn.g3" /></div>
+            <figcaption><strong>XXX</strong><span data-i18n="sn.g3">〈麥田群鴉〉</span><span class="count">66,536</span></figcaption>
+          </figure>
+          <figure class="shot" style="--ar: 0.794">
+            <div class="frame"><img src="assets/worlds/cafe-terrace.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈夜間露天咖啡座〉" data-i18n-attr="alt:sn.g4" /></div>
+            <figcaption><strong>XVI</strong><span data-i18n="sn.g4">〈夜間露天咖啡座〉</span><span class="count">117,290</span></figcaption>
+          </figure>
+          <figure class="shot" style="--ar: 1.25">
+            <div class="frame"><img src="assets/worlds/wheat-field-cypresses.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈有絲柏的麥田〉" data-i18n-attr="alt:sn.g5" /></div>
+            <figcaption><strong>XXIII</strong><span data-i18n="sn.g5">〈有絲柏的麥田〉</span><span class="count">129,863</span></figcaption>
+          </figure>
+          <figure class="shot" style="--ar: 1.778">
+            <div class="frame"><img src="assets/worlds/bedroom-off-e.png" width="1280" height="720" loading="lazy" decoding="async" alt="〈在亞爾的臥室〉，鏡頭離開視點 E" data-i18n-attr="alt:sn.g6alt" /></div>
+            <figcaption><strong>XIX</strong><span data-i18n="sn.g6">〈在亞爾的臥室〉，離開 E</span><span class="count">92,629</span></figcaption>
+          </figure>
+        </div>
+        <p class="fine gallery-note" data-i18n="sn.galleryNote">數字是每個世界的筆觸數。畫面與數字取自 starry-night-3d 的 CI 自動截圖與驗證報告（main 015d0fb，2026-10-19），用的是軟體渲染。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Editorial Doll (gesso)
+         ============================================================ -->
+    <section class="chapter surface-gesso atelier" id="editorial-doll" data-surface="gesso" aria-labelledby="ed-title">
+      <div class="wrap">
+        <p class="kicker">
+          <span class="kicker-name kicker-title">Editorial Doll</span>
+          <span data-i18n="ed.kicker">數位造型工作室</span>
+          <span class="kicker-ver" data-i18n="ed.ver">作品介紹 · iPad 版準備中</span>
+        </p>
+        <h2 class="display" id="ed-title" data-i18n="ed.title">把穿搭靈感，<br />整理成一份提案。</h2>
+        <p class="lead" data-i18n="ed.lead">從服裝、髮型到配件，在同一個虛構人物身上慢慢試出搭配。每一步都能復原，造型可以命名、保存，最後匯出成一張可以拿去討論的圖。</p>
+
+        <div class="looks">
+          <figure class="look">
+            <div class="frame"><img src="assets/looks/daylight-tailoring.jpg" width="720" height="1080" loading="lazy" decoding="async"
+                 alt="日光剪裁：駝色雙排扣外套、炭灰長褲與酒紅色提包的全身造型。" data-i18n-attr="alt:ed.l1Alt" /></div>
+            <figcaption><span class="look-no">01</span><strong data-i18n="ed.l1">日光剪裁</strong></figcaption>
+          </figure>
+          <figure class="look">
+            <div class="frame"><img src="assets/looks/evening-silhouette.jpg" width="720" height="1080" loading="lazy" decoding="async"
+                 alt="夜色輪廓：赭紅色斜裁長洋裝，搭金色耳環的晚間造型。" data-i18n-attr="alt:ed.l2Alt" /></div>
+            <figcaption><span class="look-no">02</span><strong data-i18n="ed.l2">夜色輪廓</strong></figcaption>
+          </figure>
+          <figure class="look">
+            <div class="frame"><img src="assets/looks/olive-afternoon.jpg" width="720" height="1080" loading="lazy" decoding="async"
+                 alt="橄欖午後：橄欖綠外套配赭紅百褶裙與酒紅色提包。" data-i18n-attr="alt:ed.l3Alt" /></div>
+            <figcaption><span class="look-no">03</span><strong data-i18n="ed.l3">橄欖午後</strong></figcaption>
+          </figure>
+        </div>
+        <p class="fine looks-note" data-i18n="ed.looksNote">三張都是 Editorial Doll 實際渲染出的造型圖。</p>
+
+        <div class="tool-body">
+          <p data-i18n="ed.body">每一件衣服、鞋子和配件都有版本：新舊版本並存，換成新版也能復原。介面有中文和英文，人物完全是虛構的。</p>
+          <p class="limits" data-i18n="ed.status">Editorial Doll 目前沒有公開下載。想談造型提案或合作，歡迎來信。</p>
+        </div>
+
+        <p class="links">
+          <a class="pill pill-ink" href="https://editorial-doll.sunsetvole10.chatgpt.site/#film" target="_blank" rel="noopener noreferrer" data-i18n="ed.film">看 34 秒操作示範 ↗</a>
+          <a class="text-link" href="https://editorial-doll.sunsetvole10.chatgpt.site/" target="_blank" rel="noopener noreferrer" data-i18n="ed.site">介紹頁 ↗</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         The Returning Passage (sand; the header treats it as night)
+         ============================================================ -->
+    <section class="chapter surface-sand passage" id="passage" data-surface="night" aria-labelledby="ps-title">
+      <div class="wrap">
+        <p class="kicker">
+          <span class="kicker-name kicker-title" data-i18n="name.ps">沙下迴廊</span>
+          <span data-i18n="ps.kicker">互動敘事</span>
+          <span class="kicker-ver" data-i18n="works.psStatus">製作中</span>
+        </p>
+        <h2 class="display" id="ps-title" data-i18n="ps.title">光掃過的地方，<br />字才醒來。</h2>
+        <p class="lead" data-i18n="ps.lead">一段走進沙下石室的 WebGL 旅程，有中英雙語旁白。牆上的刻文起初只是淡淡的凹痕；等一道光掃過、照進刻槽，它們才一個個亮起，最後留下一個。</p>
+
+        <figure class="passage-art" id="passage-art" data-state="final">
+          <svg class="pa-svg" viewBox="0 0 800 450" role="img" focusable="false"
+               aria-label="示意圖：深色石壁上有八個刻文，一道光由左往右掃過，刻文依序亮起，最後只留下一個還亮著。"
+               data-i18n-attr="aria-label:ps.artLabel">
+            <rect width="800" height="450" fill="url(#pa-wall)" />
+            <g fill="none" stroke="#3a2f22" stroke-width="1.2" opacity="0.55">
+              <path d="M 0 52 C 160 46 320 60 480 52 S 700 44 800 54" />
+              <path d="M 0 78 C 220 72 380 86 560 76 S 720 72 800 80" />
+              <path d="M 0 372 C 180 366 330 380 520 370 S 700 364 800 374" />
+            </g>
+            <rect x="150" y="92" width="500" height="266" rx="3" fill="url(#pa-slab)" stroke="#4a3c2b" stroke-width="2" />
+            <rect x="162" y="104" width="476" height="242" rx="2" fill="none" stroke="#0e0b08" stroke-opacity="0.6" stroke-width="1.5" />
+            <path d="M 0 404 C 140 392 260 408 400 400 S 640 390 800 402 L 800 450 L 0 450 Z" fill="url(#pa-sand)" />
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <g class="pa-glyph" style="--d: 1.3s" transform="translate(212.5 160) scale(1.35)"><use href="#gl-1" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-1" class="g-cut" /><use href="#gl-1" class="g-halo" /><use href="#gl-1" class="g-lit" /></g>
+              <g class="pa-glyph" style="--d: 1.85s" transform="translate(337.5 160) scale(1.35)"><use href="#gl-2" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-2" class="g-cut" /><use href="#gl-2" class="g-halo" /><use href="#gl-2" class="g-lit" /></g>
+              <g class="pa-glyph" style="--d: 2.4s" transform="translate(462.5 160) scale(1.35)"><use href="#gl-3" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-3" class="g-cut" /><use href="#gl-3" class="g-halo" /><use href="#gl-3" class="g-lit" /></g>
+              <g class="pa-glyph" style="--d: 2.95s" transform="translate(587.5 160) scale(1.35)"><use href="#gl-4" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-4" class="g-cut" /><use href="#gl-4" class="g-halo" /><use href="#gl-4" class="g-lit" /></g>
+              <g class="pa-glyph" style="--d: 1.4s" transform="translate(212.5 290) scale(1.35)"><use href="#gl-5" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-5" class="g-cut" /><use href="#gl-5" class="g-halo" /><use href="#gl-5" class="g-lit" /></g>
+              <g class="pa-glyph" style="--d: 1.95s" transform="translate(337.5 290) scale(1.35)"><use href="#gl-6" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-6" class="g-cut" /><use href="#gl-6" class="g-halo" /><use href="#gl-6" class="g-lit" /></g>
+              <g class="pa-glyph" style="--d: 2.5s" transform="translate(462.5 290) scale(1.35)"><use href="#gl-7" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-7" class="g-cut" /><use href="#gl-7" class="g-halo" /><use href="#gl-7" class="g-lit" /></g>
+              <g class="pa-glyph is-last" style="--d: 3.05s" transform="translate(587.5 290) scale(1.35)"><use href="#gl-8" class="g-hi" transform="translate(0.8 1.2)" /><use href="#gl-8" class="g-cut" /><use href="#gl-8" class="g-halo" /><use href="#gl-8" class="g-lit" /></g>
+            </g>
+            <g class="pa-band"><rect x="-240" y="0" width="240" height="450" fill="url(#pa-light)" transform="skewX(-12)" /></g>
+          </svg>
+          <figcaption class="pa-caption">
+            <span data-i18n="ps.artCap">示意圖，不是作品畫面。</span>
+            <button type="button" class="replay" data-i18n="ui.replay">重播</button>
+          </figcaption>
+        </figure>
+
+        <div class="sample">
+          <p class="sample-label" data-i18n="ps.sampleLabel">兩分鐘樣段</p>
+          <ol class="sample-steps">
+            <li data-i18n="ps.s1">入口</li>
+            <li data-i18n="ps.s2">刻文前廳</li>
+            <li data-i18n="ps.s3">掃光顯字</li>
+            <li data-i18n="ps.s4">殘留的記號與異常聲</li>
+            <li data-i18n="ps.s5">留白</li>
+          </ol>
+        </div>
+
+        <div class="tool-body">
+          <p data-i18n="ps.body">石材全部由程式產生：層理、顆粒、磨損的塊緣和地上的積沙都是 shader，不用外部貼圖。刻文是凹刻，亮起來的是槽底，不是表面。兩分鐘的樣段已經完成，全片規劃成七段、約 13 分鐘。</p>
+          <p class="limits" data-i18n="ps.limits">還沒有公開版本，也還不能線上體驗。完成後會放在這裡。</p>
+        </div>
+        <p class="fine ps-facts" data-i18n="ps.facts">TypeScript · three.js（WebGL 2）· 中英旁白</p>
       </div>
     </section>
 
@@ -498,7 +488,7 @@
     <section class="chapter surface-gesso contact" id="contact" data-surface="gesso" aria-labelledby="ct-title">
       <div class="wrap wrap-narrow">
         <h2 class="display" id="ct-title" data-i18n="ct.title">寫信給我。</h2>
-        <p class="lead" data-i18n="ct.lead">在做 PR 審查或 CI 工具、想把 checkwash 接進去？在自己的 repo 上碰到誤判或漏抓？或只是想聊程序化繪畫？都歡迎。中文、English 都可以。</p>
+        <p class="lead" data-i18n="ct.lead">想把 checkwash 接進你的 PR 審查或 CI？在自己的 repo 上碰到誤判或漏抓？想談 Editorial Doll 的造型提案，或只是想聊程序化繪畫？都歡迎。中文、English 都可以。</p>
         <p class="email-xl"><a id="email-link" href="mailto:taipei840428@gmail.com">taipei840428@gmail.com</a></p>
         <p class="contact-actions">
           <a class="pill pill-ink" id="email-btn" href="mailto:taipei840428@gmail.com" data-i18n="ct.mail">寄信</a>
@@ -509,8 +499,6 @@
         <p class="issues">
           <span data-i18n="ct.issues">回報問題：</span>
           <a class="text-link" href="https://github.com/taipei49314/checkwash/issues" target="_blank" rel="noopener noreferrer">checkwash ↗</a>
-          <a class="text-link" href="https://github.com/taipei49314/pinwash/issues" target="_blank" rel="noopener noreferrer">pinwash ↗</a>
-          <a class="text-link" href="https://github.com/taipei49314/ledgerwash/issues" target="_blank" rel="noopener noreferrer">ledgerwash ↗</a>
           <a class="text-link" href="https://github.com/taipei49314/starry-night-3d/issues" target="_blank" rel="noopener noreferrer">starry-night-3d ↗</a>
         </p>
         <p class="whoami" data-i18n="ct.about">我是 Nelson，獨立開發者。台北 · UTC+8</p>
@@ -522,18 +510,12 @@
     <div class="wrap">
       <h2 class="footer-title" data-i18n="fn.title">附註</h2>
       <ol class="footnotes">
-        <li id="fn-1"><span data-i18n="fn.1">本頁兩個會動的畫面，是把 PUNCTUM 在 CI 自動拍下的截圖切成許多小片、放回立體空間做的 2D 示意。PUNCTUM 本身用 three.js（WebGL 2）即時渲染：〈星夜〉約 18.1 萬筆，其他世界約 4.7 萬到 13 萬筆。</span>
-          <a href="#ref-1b" class="fn-back" aria-label="回到 PUNCTUM 的示意" data-i18n-attr="aria-label:fn.backPn">↩</a></li>
-        <li id="fn-2"><span data-i18n="fn.2">頁面上的 diff、任務編號與日期都是示意；規則名稱取自各專案的 SPEC，實際輸出以各專案的 README 為準。</span>
-          <a href="#ref-2a" class="fn-back" aria-label="a，回到 checkwash 的範例" data-i18n-attr="aria-label:fn.backCw">↩ a</a>
-          <a href="#ref-2b" class="fn-back" aria-label="b，回到 pinwash 的範例" data-i18n-attr="aria-label:fn.backPw">b</a>
-          <a href="#ref-2c" class="fn-back" aria-label="c，回到 ledgerwash 的範例" data-i18n-attr="aria-label:fn.backLw">c</a></li>
+        <li id="fn-1"><span data-i18n="fn.1">本頁開頭會動的畫面，是把 starry-night-3d 在 CI 自動拍下的〈星夜〉截圖切成許多小片、放回立體空間做的 2D 示意。作品本身用 three.js（WebGL 2）即時渲染約 18.1 萬筆筆觸。</span>
+          <a href="#ref-1a" class="fn-back" aria-label="回到開頭的畫面" data-i18n-attr="aria-label:fn.backHero">↩</a></li>
+        <li id="fn-2"><span data-i18n="fn.2">頁面上的 diff 是示意；規則名稱取自 checkwash 的 SPEC，實際輸出以 checkwash 的 README 為準。</span>
+          <a href="#ref-2a" class="fn-back" aria-label="回到 checkwash 的範例" data-i18n-attr="aria-label:fn.backCw">↩</a></li>
         <li id="fn-3"><span data-i18n="fn.3">checkwash 標出的是已知的測試弱化模式。沒有發現，不代表程式正確；exit&nbsp;2 是分析錯誤，不是通過。</span>
           <a href="#ref-3a" class="fn-back" aria-label="回到內文" data-i18n-attr="aria-label:fn.back">↩</a></li>
-        <li id="fn-4"><span data-i18n="fn.4">pinwash 是 Alpha（v0.1.1 pre-release）：會給出判定，但不替你擋下任何改動；沒有發現，不代表驗證真的有跑。套件驗收目前只涵蓋 Linux，Windows 與 macOS 還沒驗證。</span>
-          <a href="#ref-4a" class="fn-back" aria-label="回到內文" data-i18n-attr="aria-label:fn.back">↩</a></li>
-        <li id="fn-5"><span data-i18n="fn.5">ledgerwash 只檢查能機械核對的證據，比對的是帳本自己宣稱的日期，不是可信的時間戳；exit&nbsp;0 不代表帳本誠實。</span>
-          <a href="#ref-5a" class="fn-back" aria-label="回到內文" data-i18n-attr="aria-label:fn.back">↩</a></li>
       </ol>
       <div class="footer-row">
         <p data-i18n="fn.colophon">© 2026 Nelson（@taipei49314）· 純 HTML、CSS、JavaScript，不用任何外部套件。〈星夜〉原作是梵谷 1889 年的作品。</p>
