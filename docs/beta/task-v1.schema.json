@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LedgerWash complete task record (receipt-format v1)",
+  "$ref": "../../schema/receipt-v1.schema.json#/$defs/completeTaskRecord"
+}

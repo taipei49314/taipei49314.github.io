@@ -1,0 +1,23 @@
+{
+  "description": "Review the demonstration note.",
+  "evidence": "evidence/notes/clean-note.md",
+  "handoff": {
+    "checked_at": "2025-02-02T12:00:00Z",
+    "next_step": "review note",
+    "progress": "assigned",
+    "source": "evidence/notes/clean-note.md"
+  },
+  "history": [
+    {
+      "hash_format": "git-commit-bound",
+      "kind": "operation",
+      "source": "evidence/task-operations/00000000-0000-4000-8000-000000000101.json"
+    }
+  ],
+  "id": "T-101",
+  "owner": "human/demo-operator",
+  "schema_version": 1,
+  "state": "CLAIMED",
+  "status": "**CLAIMED**",
+  "time": "2025-02-02T12:00:00Z"
+}

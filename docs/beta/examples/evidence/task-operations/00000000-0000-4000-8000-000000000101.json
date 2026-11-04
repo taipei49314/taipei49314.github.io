@@ -1,0 +1,61 @@
+{
+  "after_record": {
+    "description": "Review the demonstration note.",
+    "evidence": "evidence/notes/clean-note.md",
+    "handoff": {
+      "checked_at": "2025-02-02T12:00:00Z",
+      "next_step": "review note",
+      "progress": "assigned",
+      "source": "evidence/notes/clean-note.md"
+    },
+    "history": [
+      {
+        "hash_format": "git-commit-bound",
+        "kind": "operation",
+        "source": "evidence/task-operations/00000000-0000-4000-8000-000000000101.json"
+      }
+    ],
+    "id": "T-101",
+    "owner": "human/demo-operator",
+    "schema_version": 1,
+    "state": "CLAIMED",
+    "status": "**CLAIMED**",
+    "time": "2025-02-02T12:00:00Z"
+  },
+  "after_record_sha256": "164f7e0491cce439fc4b06ae20468ae942abfba8e8a3a8518d74961f8754ccc2",
+  "before_record": null,
+  "before_record_sha256": null,
+  "expected_head": "73204d18d6d83f5aae366477979dc146fcaaba60",
+  "intent_sha256": "a5da4cf98b114d510a77aaab73a38d938a04e6c0f99dd284b43d37e0d83b3745",
+  "kind": "ec-task-operation",
+  "operation_id": "00000000-0000-4000-8000-000000000101",
+  "recorded_at": "2025-02-02T12:00:10Z",
+  "request": {
+    "actor": "human/demo-operator",
+    "at": "2025-02-02T12:00:00Z",
+    "expected": {
+      "head": "73204d18d6d83f5aae366477979dc146fcaaba60"
+    },
+    "operation": "claim",
+    "operation_id": "00000000-0000-4000-8000-000000000101",
+    "reason": "evidence/notes/clean-note.md",
+    "request_id": "00000000-0000-4000-8000-000000000101",
+    "sources": [
+      "evidence/notes/clean-note.md"
+    ],
+    "summary": {
+      "checked_at": "2025-02-02T12:00:00Z"
+    }
+  },
+  "request_id": "00000000-0000-4000-8000-000000000101",
+  "schema_version": 2,
+  "source_fingerprints": [
+    {
+      "hash_format": "raw-git-blob-bytes",
+      "origin": "expected-head-blob",
+      "sha256": "9d95f0fb8ea64987ceb8096405e5a8b7e473da77192f542d92f1db2bb1cf3caf",
+      "source": "evidence/notes/clean-note.md"
+    }
+  ],
+  "task_id": "T-101"
+}

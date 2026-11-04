@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/taipei49314/ledgerwash/schema/baseline-v1.schema.json",
+  "title": "ledgerwash Baseline Format v1",
+  "description": "Normative JSON Schema (baseline-format v1, spec-5 extension) for finding and coverage suppression baselines consumed by ledgerwash scan --baseline.",
+  "type": "object",
+  "required": [
+    "baseline_version",
+    "repo",
+    "adapter",
+    "spec_version",
+    "epoch",
+    "findings"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "baseline_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Baseline format version (must be integer 1)."
+    },
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version alias (integer 1)."
+    },
+    "ledgerwash_version": {
+      "$ref": "#/$defs/nonEmptyText",
+      "description": "Engine version that generated the baseline."
+    },
+    "spec_version": {
+      "type": "integer",
+      "const": 6,
+      "description": "Engine spec version at baseline creation (must be integer 6)."
+    },
+    "repo": {
+      "$ref": "#/$defs/nonEmptyText",
+      "description": "Canonical repository identity at which the baseline was pinned."
+    },
+    "adapter": {
+      "$ref": "#/$defs/nonEmptyText",
+      "description": "Ledger adapter or reader identifier."
+    },
+    "epoch": {
+      "$ref": "#/$defs/gitSha1",
+      "description": "40-hex Git commit SHA at which the baseline was pinned."
+    },
+    "ref": {
+      "$ref": "#/$defs/nonEmptyText",
+      "description": "Git ref as given when generating the baseline."
+    },
+    "findings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/findingEntry"
+      },
+      "description": "Baselined rule findings bound to instance identity (rule, path, locator, before, after, message) and count."
+    },
+    "coverage": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/coverageEntry"
+      },
+      "description": "Baselined incomplete mechanical verification coverage checks bound to (rule, check, path, locator, status, count)."
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "pattern": "^[^\\u0000]*$"
+    },
+    "nullableText": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[^\\u0000]*$"
+    },
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?=.*\\S)[^\\u0000]+$"
+    },
+    "positiveInt": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "gitSha1": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "ruleId": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*$"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warn",
+        "high",
+        "critical"
+      ]
+    },
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*/.*/v1:[0-9a-f]{64}$"
+    },
+    "findingEntry": {
+      "type": "object",
+      "required": [
+        "fingerprint",
+        "rule",
+        "path",
+        "locator",
+        "message",
+        "count",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "fingerprint": {
+          "$ref": "#/$defs/fingerprint",
+          "description": "Stable finding fingerprint over canonical declared fields (rule, path, locator, before, after, message, count)."
+        },
+        "rule": {
+          "$ref": "#/$defs/ruleId",
+          "description": "Rule ID of the baselined finding."
+        },
+        "path": {
+          "$ref": "#/$defs/text",
+          "description": "Repo-relative POSIX path of the record or artifact."
+        },
+        "locator": {
+          "$ref": "#/$defs/text",
+          "description": "Logical record/field location identifier (never line numbers or run timestamps)."
+        },
+        "before": {
+          "$ref": "#/$defs/nullableText",
+          "description": "Expected/prior value recorded on the finding instance (or null)."
+        },
+        "after": {
+          "$ref": "#/$defs/nullableText",
+          "description": "Observed/current value recorded on the finding instance (or null)."
+        },
+        "message": {
+          "$ref": "#/$defs/nonEmptyText",
+          "description": "Canonical finding instance message binding specific violation details."
+        },
+        "count": {
+          "$ref": "#/$defs/positiveInt",
+          "description": "Exact multiplicity of this finding instance at the baselined epoch (integer >= 1)."
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmptyText",
+          "description": "Required human-readable justification for suppressing this finding (defaults to 'accepted-legacy')."
+        },
+        "severity": {
+          "$ref": "#/$defs/severity",
+          "description": "Optional rule severity recorded for human review."
+        }
+      }
+    },
+    "coverageEntry": {
+      "type": "object",
+      "required": [
+        "fingerprint",
+        "rule",
+        "check",
+        "path",
+        "locator",
+        "status",
+        "count",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "fingerprint": {
+          "$ref": "#/$defs/fingerprint",
+          "description": "Stable coverage check fingerprint over canonical declared fields (rule, check, path, locator, status, count)."
+        },
+        "rule": {
+          "type": "string",
+          "const": "COVERAGE_INCOMPLETE",
+          "description": "Coverage incompleteness rule marker."
+        },
+        "check": {
+          "$ref": "#/$defs/nonEmptyText",
+          "description": "Mechanical coverage check identifier."
+        },
+        "path": {
+          "$ref": "#/$defs/text",
+          "description": "Repo-relative POSIX path of the checked record or directory."
+        },
+        "locator": {
+          "$ref": "#/$defs/nonEmptyText",
+          "description": "Logical locator combining record locator and check name."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unverified",
+            "mismatch"
+          ],
+          "description": "Coverage check status at baseline time ('unverified' never covers a worsened 'mismatch' state)."
+        },
+        "count": {
+          "$ref": "#/$defs/positiveInt",
+          "description": "Exact multiplicity of this coverage check state at the baselined epoch (integer >= 1)."
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmptyText",
+          "description": "Required human-readable justification for baselining this coverage gap (defaults to 'accepted-legacy')."
+        }
+      }
+    }
+  }
+}
