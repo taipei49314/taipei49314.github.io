@@ -276,6 +276,20 @@
           <p class="fine spec-note" data-i18n="cw.pipx">也可以用 pipx install checkwash==0.12.0 安裝，再執行 checkwash check HEAD~1..HEAD。</p>
         </details>
 
+        <aside class="prove" aria-labelledby="prove-title">
+          <h3 id="prove-title" data-i18n="pv.title">反過來問：真的跑一次測試</h3>
+          <p class="fine prove-meta"><span class="mono">checkwash-prove v0.1.0</span> · <span data-i18n="pv.status">實驗性，選項、輸出和結束代碼隨時可能改</span></p>
+          <p class="prove-body" data-i18n="pv.body">checkwash 只讀 diff，從不執行你的程式。checkwash-prove 反過來：它把這次改過的測試放回舊版，在舊測試跑過的程式碼裡一次放進一個小錯誤（例如把 * 換成 +），找出舊測試抓得到、新測試卻放過的錯誤，每一個都附上能單獨重跑的指令。它是獨立的套件，checkwash 不會啟動它。</p>
+          <p class="limits" data-i18n="pv.limits">它會用你的權限、在沒有沙箱的情況下執行 repo 的測試和程式。只用在你本來就會執行的程式碼上：不要在 CI 對不受信任的 PR 跑，也不要設成必要檢查。沒找到，不代表沒有少掉保護。</p>
+          <p class="try-label" data-i18n="pv.try">在專案的測試環境裡安裝（需要 Python 3.11+、Git 2.30+、pytest 7+），再拿目前的分支和 main 比：</p>
+          <div class="cmd"><code>pip install checkwash-prove==0.1.0</code><button type="button" class="cmd-copy" data-copy="pip install checkwash-prove==0.1.0" data-i18n="ui.copy">複製</button></div>
+          <div class="cmd"><code>checkwash-prove main...HEAD</code><button type="button" class="cmd-copy" data-copy="checkwash-prove main...HEAD" data-i18n="ui.copy">複製</button></div>
+          <p class="links links-small">
+            <a class="text-link" href="https://github.com/taipei49314/checkwash-prove" target="_blank" rel="noopener noreferrer" data-i18n="pv.linkRepo">原始碼與說明 ↗</a>
+            <a class="text-link" href="https://github.com/taipei49314/checkwash-prove/blob/main/THREATMODEL.md" target="_blank" rel="noopener noreferrer" data-i18n="pv.linkThreat">威脅模型 ↗</a>
+          </p>
+        </aside>
+
         <aside class="builders" aria-labelledby="builders-title">
           <h3 id="builders-title" data-i18n="cw.buildersTitle">在做 PR 審查或 CI 工具？</h3>
           <p data-i18n="cw.buildersBody">checkwash 的設計，就是讓你嵌進自己的工具裡。跑一次、讀 JSON；也有 SARIF 輸出和 GitHub Action。要真的擋下合併，得把 checkwash 設成必要的狀態檢查。1.0 之前格式還可能調整，請在 CI 裡釘住確切版本，也歡迎告訴我你需要什麼。</p>
@@ -499,6 +513,7 @@
         <p class="issues">
           <span data-i18n="ct.issues">回報問題：</span>
           <a class="text-link" href="https://github.com/taipei49314/checkwash/issues" target="_blank" rel="noopener noreferrer">checkwash ↗</a>
+          <a class="text-link" href="https://github.com/taipei49314/checkwash-prove/issues" target="_blank" rel="noopener noreferrer">checkwash-prove ↗</a>
           <a class="text-link" href="https://github.com/taipei49314/starry-night-3d/issues" target="_blank" rel="noopener noreferrer">starry-night-3d ↗</a>
         </p>
         <p class="whoami" data-i18n="ct.about">我是 Nelson，獨立開發者。台北 · UTC+8</p>

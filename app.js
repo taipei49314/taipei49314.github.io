@@ -127,6 +127,16 @@
     "cw.linkSchema": "Findings JSON schema ↗",
     "cw.linkStability": "Compatibility notes ↗",
 
+    "pv.title": "The other way round: run the tests",
+    "pv.status": "experimental: options, output and exit codes may change in any version",
+    "pv.body":
+      "checkwash reads the diff and never runs your code. checkwash-prove asks the same question the other way: it puts the tests the change touched back to their old version, plants one small fault at a time in the code those old tests ran (say, * turned into +), and lists each fault the old tests caught but the new suite lets through, with a command that replays it alone. It is a separate package; checkwash never starts it.",
+    "pv.limits":
+      "It runs the repository's tests and code with your privileges and no sandbox. Use it only on code you would run anyway: never on an untrusted pull request in CI, and not as a required check. Finding nothing doesn't mean no protection was lost.",
+    "pv.try": "Install it in the project's test environment (Python 3.11+, Git 2.30+, pytest 7+), then compare your branch with main:",
+    "pv.linkRepo": "Source and docs ↗",
+    "pv.linkThreat": "Threat model ↗",
+
     "sn.kicker": "a painting you can walk into",
     "sn.title": "About 181,000 strokes.<br />One place to stand.",
     "sn.lead":
