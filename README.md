@@ -15,7 +15,7 @@ viewpoint, a look with the person wearing it, inscriptions with the light.
 | --- | --- |
 | Hero | A CI screenshot of starry-night-3d's *The Starry Night*, cut into hundreds (phones) to a few thousand (desktop) tiles. Each tile sits on the ray from E at its own depth. As you scroll, a perspective camera moves to E and the tiles land exactly on the painting; the last step maps each work to what it lines up with. |
 | Works | The four works as cards: checkwash, *The Starry Night from One Viewpoint*, Editorial Doll, *The Returning Passage*. Each card links to its section. |
-| checkwash | `assert total == 105.3` loosened to `assert total > 0`: the test stays green, a number line shows which wrong answers now pass, and checkwash flags `ASSERT_WEAKENED`. Try-it commands for v0.10.0 and a block for people who build PR-review or CI tools. |
+| checkwash | `assert total == 105.3` loosened to `assert total > 0`: the test stays green, a number line shows which wrong answers now pass, and checkwash flags `ASSERT_WEAKENED`. Try-it commands for v0.12.0 and a block for people who build PR-review or CI tools. |
 | The Starry Night | Three GPU renders from the starry-night-3d README (at E, stepping aside, inside the sky), links to the live work, and six of the 29 other paintings the same engine renders, with links to its witness, odyssey and atlas modes. |
 | Editorial Doll | Three looks rendered by Editorial Doll, what the atelier does, and links to its showcase page and 34-second demo. No download: Editorial Doll is not publicly distributed. |
 | The Returning Passage | Marked 製作中 (in progress). An SVG illustration, not a frame from the work: a band of light sweeps a stone slab and wakes eight made-up glyphs, one of which stays lit. The two-minute sample's five beats and what is finished. No link: there is no public version. |
@@ -54,8 +54,8 @@ everything, and controls that need JavaScript are hidden.
 - **Versions and status** appear in `index.html` (the version pills next to each
   name, the works cards, the checkwash `.facts` list and try-it commands) and in the
   matching `EN` strings in `app.js` (`works.*Status`, `cw.*`, `ed.ver`). The checkwash
-  version, date and commands were checked against the v0.10.0 release and README on
-  2026-10-29.
+  version, date and commands were checked against the v0.12.0 release, its README
+  and PyPI on 2026-11-08.
 - **Any text**: change the Chinese in `index.html` and the English under the same
   key in `EN`. Keys are `data-i18n` (element content), `data-i18n-html` (content
   with links) and `data-i18n-attr="attr:key;attr:key"` (attributes). A
@@ -132,6 +132,8 @@ as is. Only the hero image loads eagerly; the rest use `loading="lazy"`.
 
 ## Status
 
+- 2026-11-08: checkwash version, release link and install commands updated from
+  v0.10.0 to v0.12.0 (released 2026-11-07); no other content changed.
 - 2026-10-29: redesigned around four works (checkwash, The Starry Night, Editorial
   Doll, The Returning Passage); the earlier tool sections and family table were removed.
 - The earlier design was delivered at `0877330` (Site run

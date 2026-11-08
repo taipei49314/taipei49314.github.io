@@ -111,10 +111,10 @@
     "cw.limits": "When nothing fires, it says “no known tampering pattern detected.” Not “no cheating.”",
     "cw.status": "alpha, pre-1.0",
     "cw.try":
-      "Try it: download checkwash.pyz from the v0.10.0 release, run the built-in offline examples, then check your last commit from the root of your repo.",
-    "cw.linkRelease": "Download v0.10.0 ↗",
+      "Try it: download checkwash.pyz from the v0.12.0 release, run the built-in offline examples, then check your last commit from the root of your repo.",
+    "cw.linkRelease": "Download v0.12.0 ↗",
     "cw.linkLimits": "Known limits ↗",
-    "cw.pipx": "You can also install it with pipx install checkwash==0.10.0 and run checkwash check HEAD~1..HEAD.",
+    "cw.pipx": "You can also install it with pipx install checkwash==0.12.0 and run checkwash check HEAD~1..HEAD.",
     "cw.buildersTitle": "Building a PR-review or CI tool?",
     "cw.buildersBody":
       "checkwash is designed to be embedded in tools like yours. Run it once and read the JSON; there is SARIF output and a GitHub Action too. To actually block merges, make the checkwash status check required. Formats may still change before 1.0, so pin the exact version in CI, and tell me what you'd need.",
