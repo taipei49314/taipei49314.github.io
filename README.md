@@ -19,7 +19,7 @@ only form the painting from the painter's eye E.
 | Works | Two groups of cards. Developer tools: checkwash, boundary-unpack. Interactive works: Editorial Doll, *The Starry Night from One Viewpoint*, *The Returning Passage*. Each card links to its section, and the sections follow the same order. |
 | checkwash | `assert total == 105.3` loosened to `assert total > 0`: the test stays green, a number line shows which wrong answers now pass, and checkwash flags `ASSERT_WEAKENED`. Try-it commands for v0.13.1, a panel for the VS Code extension checkwash-lens (v0.2.0), a panel for its experimental companion checkwash-prove (v0.1.0, runs the tests), and a block for people who build PR-review or CI tools. |
 | boundary-unpack | Night. What it protects against, how the sandbox, broker and atomic publish fit together, its fixed limits and supported systems, and the quick-start commands for v0.1.0. |
-| Editorial Doll | Three looks rendered by Editorial Doll, what the atelier does, and links to its showcase page and 34-second demo. No download: Editorial Doll is not publicly distributed. |
+| Editorial Doll | Three looks rendered by Editorial Doll, what the atelier does, and links to its showcase page and 34-second demo. Marked coming soon: it is not public yet and will open in the browser with no sign-in, as the GitHub profile says. |
 | The Starry Night | Three GPU renders from the starry-night-3d README (at E, stepping aside, inside the sky), links to the live work, and six of the 29 other paintings the same engine renders, with links to its witness, odyssey and atlas modes. |
 | The Returning Passage | Marked 製作中 (in progress). An SVG illustration, not a frame from the work: a band of light sweeps a stone slab and wakes eight made-up glyphs, one of which stays lit. The two-minute sample's five beats and what is finished. No link: there is no public version. |
 | Contact | Email, copy button, GitHub and issue links for the five public tool and work repositories. |
@@ -139,6 +139,10 @@ as is. Only the hero image loads eagerly; the rest use `loading="lazy"`.
 
 ## Status
 
+- 2026-11-23 (later): Editorial Doll and The Returning Passage now match the GitHub
+  profile: Editorial Doll is "coming soon, in the browser, no sign-in" instead of
+  "showcase, iPad version in preparation"; The Returning Passage's full piece is a
+  bilingual short of about three minutes (was "seven parts, about 13 minutes").
 - 2026-11-23: repositioned to match the GitHub profile (everyday developer tools
   and interactive works) instead of the 對得上 theme. Title, description, hero
   headline and bridge rewritten; works grouped into tools and works; checkwash
