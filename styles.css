@@ -81,6 +81,7 @@ body:lang(zh-Hant) {
 h1,
 h2,
 h3,
+h4,
 p,
 ol,
 ul,
@@ -1687,6 +1688,57 @@ html:not(.is-scrub) .step[data-step="3"] {
 .work-line {
   font-size: 16px;
   color: var(--night-ink-2);
+}
+
+/* Two groups, developer tools and interactive works, each with its own grid. */
+.work-group {
+  margin-top: clamp(40px, 7vh, 72px);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--night-ink-2);
+}
+
+.work-group + .work-grid {
+  margin-top: 16px;
+}
+
+@media (min-width: 1000px) {
+  .work-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* boundary-unpack's card: the same text panel as checkwash's, no strike-through. */
+.wa-cmd {
+  color: var(--ink-2);
+}
+
+/* ==========================================================================
+   BOUNDARY-UNPACK (night)
+   ========================================================================== */
+
+.unpack .tool-body {
+  margin-top: clamp(28px, 5vh, 44px);
+}
+
+.unpack .limits {
+  color: var(--night-ink);
+}
+
+.unpack .try-label {
+  color: var(--night-ink-2);
+}
+
+/* The ink command box would vanish on night: lift it to the card colour. */
+.unpack .cmd {
+  background: var(--night-2);
+  border: 1px solid var(--night-line);
+}
+
+.bu-facts {
+  max-width: 760px;
+  margin-top: 12px;
 }
 
 /* ==========================================================================

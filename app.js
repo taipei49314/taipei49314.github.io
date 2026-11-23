@@ -33,9 +33,9 @@
   // data-i18n-attr key. Strings are authored here, never user input, so
   // they may carry <br>, <sup> and <a> markup.
   const EN = {
-    "meta.title": "Nelson — Every stroke has to line up",
+    "meta.title": "Nelson · Independent developer in Taipei",
     "meta.desc":
-      "Nelson (@taipei49314), an independent developer in Taipei. checkwash flags code changes that weaken tests; The Starry Night from One Viewpoint is a painting you can walk into; Editorial Doll is a digital styling atelier; The Returning Passage is a journey through a stone chamber, still in progress.",
+      "Nelson (@taipei49314), an independent developer in Taipei making everyday developer tools and interactive visual works: checkwash catches tests that were loosened, boundary-unpack extracts untrusted archives safely on Linux; The Starry Night from One Viewpoint is a painting you can walk into, Editorial Doll is a digital styling atelier, and The Returning Passage is still in progress.",
 
     "nav.skip": "Skip to the works",
     "nav.label": "Primary",
@@ -46,7 +46,6 @@
     "nav.langCode": "zh-Hant",
 
     "name.sn": "The Starry Night from One Viewpoint",
-    "name.snShort": "The Starry Night",
     "name.ps": "The Returning Passage",
 
     "hero.alt":
@@ -54,26 +53,30 @@
     "hero.canvasLabel":
       "Pieces of the painting sit at different depths; as you scroll, the camera walks to point E, where they form The Starry Night.",
     "hero.eyebrow": "Nelson · independent developer in Taipei",
-    "hero.title": "Every stroke<br />has to line up.",
+    "hero.title": "Tools for every day.<br />Works you can just open.",
     "hero.sub":
-      "I write a tool that checks code changes, and I made a Starry Night you can walk into, a digital styling atelier, and a journey through a stone chamber that is still in progress.",
+      "The developer tools are light and run on your own machine, to spare you a few pitfalls. The works are 3D visuals, interactive stories and digital styling.",
     "hero.ctaWorks": "See the work ›",
     "hero.cue": "Scroll to stand where the painter stood",
     "hero.moving":
       "Keep going. Each piece stays on its own ray; you are the one moving, and the closer you get to E, the closer they come to their places in the painting.",
     "hero.locked":
       'Right here: point E. Only from this one point do the pieces form The Starry Night.<sup><a href="#fn-1" id="ref-1a">1</a></sup>',
-    "hero.bridgeTitle": "So does<br />everything I make.",
-    "hero.bridgeSub": "Four works, each one lining up with one thing.",
-    "hero.mapCw": "A pass, with its evidence",
-    "hero.mapSn": "Strokes, with one viewpoint",
-    "hero.mapEd": "A look, with the person wearing it",
-    "hero.mapPs": "Inscriptions, with the light",
+    "hero.bridgeTitle": "This painting<br />is one of them.",
+    "hero.bridgeSub": "Below: two developer tools and two more works.",
+    "hero.mapCw": "Catch loosened tests",
+    "hero.mapBu": "Unpack archives safely",
+    "hero.mapEd": "Turn outfits into a proposal",
+    "hero.mapPs": "Light wakes the words",
 
-    "works.title": "Four works.",
-    "works.lead": "A tool, a painting, an atelier, and a journey still being built.",
-    "works.cwType": "Tool",
-    "works.cwLine": "Catches tests that were quietly loosened.",
+    "works.title": "Tools and works.",
+    "works.lead": "The developer tools run on your own machine. Some works open right in your browser; some are still being made.",
+    "works.toolsTitle": "Developer tools",
+    "works.artTitle": "Interactive works",
+    "works.cwType": "Test check",
+    "works.cwLine": "Catches tests that were quietly loosened. There's a VS Code extension too.",
+    "works.buType": "Safe extraction",
+    "works.buLine": "Extracts untrusted archives in a sandbox, and leaves nothing behind unless it's complete.",
     "works.snType": "Interactive work",
     "works.snStatus": "Live online",
     "works.snLine": "About 181,000 strokes that form Van Gogh's painting from exactly one point.",
@@ -111,10 +114,10 @@
     "cw.limits": "When nothing fires, it says “no known tampering pattern detected.” Not “no cheating.”",
     "cw.status": "alpha, pre-1.0",
     "cw.try":
-      "Try it: download checkwash.pyz from the v0.12.0 release, run the built-in offline examples, then check your last commit from the root of your repo.",
-    "cw.linkRelease": "Download v0.12.0 ↗",
+      "Try it: download checkwash.pyz from the v0.13.1 release, run the built-in offline examples, then check your last commit from the root of your repo.",
+    "cw.linkRelease": "Download v0.13.1 ↗",
     "cw.linkLimits": "Known limits ↗",
-    "cw.pipx": "You can also install it with pipx install checkwash==0.12.0 and run checkwash check HEAD~1..HEAD.",
+    "cw.pipx": "You can also install it with pipx install checkwash==0.13.1 and run checkwash check HEAD~1..HEAD.",
     "cw.buildersTitle": "Building a PR-review or CI tool?",
     "cw.buildersBody":
       "checkwash is designed to be embedded in tools like yours. Run it once and read the JSON; there is SARIF output and a GitHub Action too. To actually block merges, make the checkwash status check required. Formats may still change before 1.0, so pin the exact version in CI, and tell me what you'd need.",
@@ -126,6 +129,29 @@
     "cw.linkEmbed": "Embedding guide ↗",
     "cw.linkSchema": "Findings JSON schema ↗",
     "cw.linkStability": "Compatibility notes ↗",
+
+    "ln.title": "Rather not open a terminal? One click in VS Code",
+    "ln.platforms": "Windows x64, Linux x64 (including WSL2 and Dev Containers)",
+    "ln.body":
+      "checkwash-lens puts checkwash v0.13.1 inside VS Code. Before you commit, click the shield in the Source Control view to check your staged or working-tree changes; or scan a whole branch, see each change side by side, and jump straight to the line to fix. Opening, editing or saving files never runs anything on its own.",
+    "ln.try":
+      "Download the .vsix for your platform from the v0.2.0 release and install it (you also need Python 3.11+ and Git; checkwash comes bundled):",
+    "ln.linkRepo": "Source and docs ↗",
+    "ln.linkRelease": "Download v0.2.0 ↗",
+
+    "bu.kicker": "safely extracts untrusted archives",
+    "bu.title": "All of it,<br />or nothing at all.",
+    "bu.lead":
+      "A .zip or .tar.gz from the internet or a user upload can hide paths that climb out of the folder, symlinks, or a zip bomb. boundary-unpack extracts it inside a kernel-enforced sandbox on Linux and publishes into a brand-new directory: the result appears complete, or never exists at all.",
+    "bu.body":
+      "The Python decoder runs under a seccomp allowlist that blocks opening files, sockets and starting programs, inside a cgroup v2 that caps its memory, processes and CPU. A Rust broker does the writing, creating only regular files and directories beneath the target with openat2. Every file's hash, size and mode is checked before a single renameat2 publishes the result, next to a receipt.json. If the target directory already exists, it refuses to overwrite it.",
+    "bu.limits":
+      "Linux x86_64 only, with cgroup v2 and ext4; tested on Debian 12 and Ubuntu 24.04. Formats are ZIP (Stored, Deflate) and TAR.GZ, with fixed limits: 256 MiB in, 1 GiB out, 30 seconds.",
+    "bu.try":
+      "Try it: install the .deb from the v0.1.0 release, make a directory only you can write to, run the self-check, then extract an archive.",
+    "bu.linkRelease": "Download v0.1.0 ↗",
+    "bu.linkThreat": "Threat model ↗",
+    "bu.facts": "Rust · Python · Apache-2.0. Every run uses the same fixed limits; nothing outside can loosen them.",
 
     "pv.title": "The other way round: run the tests",
     "pv.status": "experimental: options, output and exit codes may change in any version",
@@ -211,7 +237,7 @@
 
     "ct.title": "Write to me.",
     "ct.lead":
-      "Want to plug checkwash into your PR review or CI? Hit a false positive or a miss on your own repo? Want to talk about a styling proposal with Editorial Doll, or just about procedural painting? All welcome, in English or 中文.",
+      "A tool won't run in your setup, or flagged the wrong thing, or missed something? Want to plug checkwash into your PR review or CI? Want to talk about a styling proposal with Editorial Doll, or just about procedural painting? All welcome, in English or 中文.",
     "ct.mail": "Email me",
     "ct.copy": "Copy address",
     "ct.issues": "Report a problem:",

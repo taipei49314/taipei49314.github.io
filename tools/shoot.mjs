@@ -146,13 +146,14 @@ async function run(browser, lang, motion) {
       ["05-works", "#works", "start", 900],
       ["06-checkwash", "#checkwash", "start", 500],
       ["07-checkwash-demo", "#demo-cw", "center", 4600],
-      ["08-starry", "#starry", "start", 1200],
-      ["09-gallery", ".gallery:not(.triptych)", "start", 1500],
-      ["10-editorial-doll", "#editorial-doll", "start", 1200],
-      ["11-passage", "#passage", "start", 900],
-      ["12-passage-sweep", "#passage-art", "center", 6400],
-      ["13-contact", "#contact", "start", 700],
-      ["14-footer", "footer", "start", 500],
+      ["08-boundary-unpack", "#boundary-unpack", "start", 700],
+      ["09-editorial-doll", "#editorial-doll", "start", 1200],
+      ["10-starry", "#starry", "start", 1200],
+      ["11-gallery", ".gallery:not(.triptych)", "start", 1500],
+      ["12-passage", "#passage", "start", 900],
+      ["13-passage-sweep", "#passage-art", "center", 6400],
+      ["14-contact", "#contact", "start", 700],
+      ["15-footer", "footer", "start", 500],
     ];
     for (const [label, sel, block, ms] of stops) {
       if (sel && !(await scrollIntoView(sel, block))) fail(`missing ${sel}`);
@@ -195,11 +196,12 @@ async function run(browser, lang, motion) {
       ["03-hero-bridge", ".step-bridge"],
       ["04-works", "#works"],
       ["05-checkwash-demo", "#demo-cw"],
-      ["06-starry", "#starry"],
-      ["07-gallery", ".gallery:not(.triptych)"],
-      ["08-editorial-doll", "#editorial-doll"],
-      ["09-passage-art", "#passage-art"],
-      ["10-contact", "#contact"],
+      ["06-boundary-unpack", "#boundary-unpack"],
+      ["07-editorial-doll", "#editorial-doll"],
+      ["08-starry", "#starry"],
+      ["09-gallery", ".gallery:not(.triptych)"],
+      ["10-passage-art", "#passage-art"],
+      ["11-contact", "#contact"],
     ]) {
       if (!(await scrollIntoView(sel, "start"))) fail(`missing ${sel}`);
       await wait(250);
