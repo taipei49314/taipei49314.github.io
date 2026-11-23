@@ -81,7 +81,7 @@
     "works.snStatus": "Live online",
     "works.snLine": "About 181,000 strokes that form Van Gogh's painting from exactly one point.",
     "works.edType": "Styling atelier",
-    "works.edStatus": "Showcase",
+    "works.edStatus": "Coming soon",
     "works.edLine": "Turns outfit ideas into a styling proposal.",
     "works.psType": "Interactive narrative",
     "works.psStatus": "In progress",
@@ -199,7 +199,7 @@
       "Numbers are the stroke count of each world. Images and numbers come from the starry-night-3d CI screenshots and verification report (main 015d0fb, 2026-10-19), rendered in software.",
 
     "ed.kicker": "a digital styling atelier",
-    "ed.ver": "Showcase · iPad version in preparation",
+    "ed.ver": "Coming soon · in the browser",
     "ed.title": "Turn outfit ideas<br />into a proposal.",
     "ed.lead":
       "Clothes, hair and accessories, tried on one fictional muse until the look works. Every step can be undone; a look can be named and saved, then exported as an image to talk about.",
@@ -213,7 +213,7 @@
     "ed.body":
       "Every garment, shoe and accessory is versioned: old and new versions sit side by side, and switching to a new one can be undone. The interface is in Chinese and English, and the muse is entirely fictional.",
     "ed.status":
-      "Editorial Doll isn't available for download. To talk about a styling proposal or working together, write to me.",
+      "Editorial Doll isn't public yet. When it's ready, it will open right in your browser with no account needed, and export high-resolution posters. To talk about a styling proposal or working together, write to me.",
     "ed.film": "Watch the 34-second demo ↗",
     "ed.site": "Showcase page ↗",
 
@@ -231,7 +231,7 @@
     "ps.s4": "A lingering mark, a strange sound",
     "ps.s5": "Silence",
     "ps.body":
-      "The stone is generated entirely in code: bedding, grain, worn block edges and drifted sand are all shaders, with no external textures. The inscriptions are cut into the stone, and what lights up is the bottom of each groove, not the surface. The two-minute sample is finished; the full piece is planned as seven parts, about 13 minutes long.",
+      "The stone is generated entirely in code: bedding, grain, worn block edges and drifted sand are all shaders, with no external textures. The inscriptions are cut into the stone, and what lights up is the bottom of each groove, not the surface. The two-minute sample is finished; the full piece is a bilingual short of about three minutes, best watched with headphones.",
     "ps.limits": "There is no public version yet and nothing to try online. When it's ready, it will be here.",
     "ps.facts": "TypeScript · three.js (WebGL 2) · narration in Chinese and English",
 
