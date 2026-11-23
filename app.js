@@ -62,7 +62,7 @@
       "Keep going. Each piece stays on its own ray; you are the one moving, and the closer you get to E, the closer they come to their places in the painting.",
     "hero.locked":
       'Right here: point E. Only from this one point do the pieces form The Starry Night.<sup><a href="#fn-1" id="ref-1a">1</a></sup>',
-    "hero.bridgeTitle": "This painting<br />is one of them.",
+    "hero.bridgeTitle": "This painting<br />is one of my works.",
     "hero.bridgeSub": "Below: two developer tools and two more works.",
     "hero.mapCw": "Catch loosened tests",
     "hero.mapBu": "Unpack archives safely",
@@ -76,7 +76,7 @@
     "works.cwType": "Test check",
     "works.cwLine": "Catches tests that were quietly loosened. There's a VS Code extension too.",
     "works.buType": "Safe extraction",
-    "works.buLine": "Extracts untrusted archives in a sandbox, and leaves nothing behind unless it's complete.",
+    "works.buLine": "Extracts untrusted archives in a sandbox; the target directory appears only when it's complete.",
     "works.snType": "Interactive work",
     "works.snStatus": "Live online",
     "works.snLine": "About 181,000 strokes that form Van Gogh's painting from exactly one point.",
@@ -144,7 +144,7 @@
     "bu.lead":
       "A .zip or .tar.gz from the internet or a user upload can hide paths that climb out of the folder, symlinks, or a zip bomb. boundary-unpack extracts it inside a kernel-enforced sandbox on Linux and publishes into a brand-new directory: the result appears complete, or never exists at all.",
     "bu.body":
-      "The Python decoder runs under a seccomp allowlist that blocks opening files, sockets and starting programs, inside a cgroup v2 that caps its memory, processes and CPU. A Rust broker does the writing, creating only regular files and directories beneath the target with openat2. Every file's hash, size and mode is checked before a single renameat2 publishes the result, next to a receipt.json. If the target directory already exists, it refuses to overwrite it.",
+      "The Python decoder runs under a seccomp allowlist that blocks opening files, sockets and starting programs, inside a cgroup v2 that caps its memory, processes and CPU. A Rust broker does the writing, creating only regular files and directories inside a private staging directory with openat2. Every file's hash, size and mode is checked before a single renameat2 publishes that whole directory at the target, with a receipt.json inside. If the target directory already exists, it refuses to overwrite it.",
     "bu.limits":
       "Linux x86_64 only, with cgroup v2 and ext4; tested on Debian 12 and Ubuntu 24.04. Formats are ZIP (Stored, Deflate) and TAR.GZ, with fixed limits: 256 MiB in, 1 GiB out, 30 seconds.",
     "bu.try":

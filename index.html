@@ -121,7 +121,7 @@
           </div>
 
           <div class="step step-bridge" data-step="3">
-            <p class="bridge-title" data-i18n="hero.bridgeTitle">這幅畫，<br />是其中一件。</p>
+            <p class="bridge-title" data-i18n="hero.bridgeTitle">這幅畫，<br />是我的作品之一。</p>
             <p class="bridge-sub" data-i18n="hero.bridgeSub">下面還有兩個開發工具，和兩件作品。</p>
             <p class="bridge-map">
               <a href="#checkwash"><span data-i18n="hero.mapCw">抓出被改鬆的測試</span><b class="mono">checkwash</b></a>
@@ -165,7 +165,7 @@
             <div class="work-body">
               <p class="work-meta"><span data-i18n="works.buType">安全解壓</span><span class="work-status mono">v0.1.0 · Linux</span></p>
               <h4 class="work-name mono"><a class="work-link" href="#boundary-unpack">boundary-unpack</a></h4>
-              <p class="work-line" data-i18n="works.buLine">在沙箱裡解開不可信的壓縮檔，不完整就不留下。</p>
+              <p class="work-line" data-i18n="works.buLine">在沙箱裡解開不可信的壓縮檔，目標目錄不完整就不會出現。</p>
             </div>
           </li>
         </ul>
@@ -358,7 +358,7 @@
         <p class="lead" data-i18n="bu.lead">從網路下載或使用者上傳的 .zip、.tar.gz，可能藏著跳出目錄的路徑、符號連結或壓縮炸彈。boundary-unpack 在 Linux 核心強制的沙箱裡解壓，寫進一個全新的目錄：結果要嘛完整出現，要嘛根本不存在。</p>
 
         <div class="tool-body">
-          <p data-i18n="bu.body">負責解碼的 Python 程式被 seccomp 擋住開檔、連網和啟動程式，cgroup v2 限制它的記憶體、程序數和 CPU。真正寫檔的是一個 Rust broker，用 openat2 只在目標底下建立一般檔案和目錄。每個檔案的雜湊、大小和權限都核對過，才用 renameat2 一次發布，旁邊附一份 receipt.json。目標目錄已經存在時，它拒絕覆蓋。</p>
+          <p data-i18n="bu.body">負責解碼的 Python 程式被 seccomp 擋住開檔、連網和啟動程式，cgroup v2 限制它的記憶體、程序數和 CPU。真正寫檔的是一個 Rust broker，用 openat2 只在一個私有的暫存目錄裡建立一般檔案和目錄。每個檔案的雜湊、大小和權限都核對過，才用 renameat2 把整個目錄一次發布到目標位置，裡面附一份 receipt.json。目標目錄已經存在時，它拒絕覆蓋。</p>
           <p class="limits" data-i18n="bu.limits">目前只支援 Linux x86_64，需要 cgroup v2 和 ext4，在 Debian 12 和 Ubuntu 24.04 上測過。格式只有 ZIP（Stored、Deflate）和 TAR.GZ，上限固定：輸入 256 MiB、輸出 1 GiB、30 秒。</p>
         </div>
 

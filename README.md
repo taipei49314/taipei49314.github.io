@@ -145,6 +145,11 @@ as is. Only the hero image loads eagerly; the rest use `loading="lazy"`.
   updated from v0.12.0 to v0.13.1; added a checkwash-lens v0.2.0 panel and a
   boundary-unpack v0.1.0 section; Editorial Doll now comes before The Starry Night
   so night and gesso sections still alternate; issue links for both new repositories.
+  After a blind-spot review: the bridge now says the painting is one of the works,
+  boundary-unpack's copy says the broker writes into a private staging directory
+  that renameat2 publishes at the target, its card's success line is ink (not the
+  signal red that means "got weaker"), and CI screenshots stop at the checkwash-lens
+  panel too.
 - 2026-11-08: added a checkwash-prove v0.1.0 panel to the checkwash section and its
   issue link to Contact.
 - 2026-11-08: checkwash version, release link and install commands updated from
